@@ -1,0 +1,15 @@
+{
+  "name": "sanyukt",
+  "version": "1.0.0",
+  "description": "A desi social application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sudhendra",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
