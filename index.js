@@ -4,6 +4,11 @@ const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 
 app.use(express.static('./assets'));
+//extract syles and scripts..
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
+
 
 //use express-ejs-layouts..
 app.use(expressLayouts);
