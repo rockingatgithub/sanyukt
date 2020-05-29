@@ -1,8 +1,11 @@
-<form action="/users/signup" method = "POST" id="signin-form">
+<form action="/users/create" method = "POST" id="signin-form">
     <label for="username">Username</label>
-    <input type="text name="username" id="user-name"/>
+    <input type="text name="username" id="user-name" required/>
     <label for="email">Email</label>
-    <input type="email" name="email" placeholder="Enter your email" id="user-id" />
+    <input type="email" name="email" placeholder="Enter your email" id="user-id" required/>
     <label for="password">Password</label>
-    <input type="password" name="password" placeholder="Enter your password" id="user-password"/>
+    <input type="password" name="password" placeholder="Enter your password" id="user-password" required/>
+    <label for="cofirm-password">Confirm Password</label>
+    <input type="password" name="confirm-password" placeholder="re-enter apssword" id="confirm-password" required/>
+    <button type="submit" id="signup-button">Signup</button>
 </form>
