@@ -3,7 +3,7 @@ const router = express.Router();
 
 const homeController = require('../controllers/home_controller');
 router.get('/', homeController.home);
-router.use('/users', require('./users'));  // as this file is used as main file 
+router.use('/users', require('./users'));  // as this file is used as main file use users file for other routes..
 
 
 
