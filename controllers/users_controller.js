@@ -3,19 +3,19 @@ const User = require('../models/user');
 module.exports.profile =function(req, res){
     return res.render('user_profile',{
         title: "Profile"
-    });
-}
-
-module.exports.signin = function(req, res){
-    return res.render('signin',{
-        title: "Signin"
-    });
+    })
 }
 
 module.exports.signup = function(req, res){
     return res.render('signup',{
         title: "Signup"
-    });
+    })
+}
+
+module.exports.signin = function(req, res){
+    return res.render('signin',{
+        title: "Signin"
+    })
 }
 
 
@@ -23,14 +23,14 @@ module.exports.signup = function(req, res){
 
 module.exports.create = function(req, res){
     
-    if(req.body.password != req.body.confirm-password){
+    if(req.body.password != req.body.confirm_password){
         return res.redirect('back');
     }
     //check if user already exists in db..
     User.findOne({email: req.body.email}, function(err, user){
         if(err){
             console.log('error in finding user while sign up');
-            return;
+            return
         }
 
         if(!user){
@@ -40,14 +40,14 @@ module.exports.create = function(req, res){
                     return;
                 }
                 return res.redirect('/users/signin');
-            });
+            })
         }
         else{
             return res.redirect('back');
         }
     })
 
-};
+}
 
 //signing in and creating session..
 module.exports.createSession = function(req, res){

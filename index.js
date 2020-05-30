@@ -13,13 +13,12 @@ app.use(cookieParser());
 
 app.use(express.static('./assets'));
 //extract syles and scripts..
+//use express-ejs-layouts..
+app.use(expressLayouts);
+
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
-
-
-//use express-ejs-layouts..
-app.use(expressLayouts);
 
 
 
