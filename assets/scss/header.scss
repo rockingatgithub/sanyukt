@@ -1,0 +1,27 @@
+header{
+    display: flex;
+    margin: 0;
+    background: linear-gradient(to right, #3e5151, #decba4);
+    #auth-title{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    #auth-links{
+        display: inline-block;
+        margin-left: 72%;
+        list-style: none;
+        li{
+            display: inline-block;
+            margin-left: 15px;
+            a{
+                text-decoration: none;
+                font-size: 20px;
+                color: whitesmoke;
+                &:hover{
+                    color: gainsboro;
+                }
+            }
+        }
+    }
+}

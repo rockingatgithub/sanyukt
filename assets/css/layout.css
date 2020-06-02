@@ -1,4 +1,5 @@
 body {
-  margin: 0;
-  text-align: center;
-  margin-left: 20%; }
+  margin: 0; }
+  body #layout-main {
+    color: burlywood;
+    background: cornsilk; }
