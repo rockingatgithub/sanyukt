@@ -4,13 +4,26 @@
 </head>
 <body>
     <h1><%= title%></h1>
-    <p>Swagat Hai!</p>
     <section id="feed-posts">
         <h4>Posts</h4>
-        <form action="" id="new-post-form" method="POST">
+        <form action="/posts/create" id="new-post-form" method="POST">
             <textarea name="content" cols="30" rows="3"></textarea>
             <input type="submit" value="Post">
         </form>
+
+        <div id="post-list-box">
+            <ul>
+                <%for(post of posts){%>
+                    <p>
+                        <%= post.content%>
+                        <br>
+                        <small>
+                            <%= post.user.name%>
+                        </small>
+                    </p>
+                    <%}%>
+            </ul>
+        </div>
     </section>
 
     <a href="/users/profile"> open your profile</a>

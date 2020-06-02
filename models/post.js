@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
         required: true    //so that it must be saved..
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId;
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
 },{
