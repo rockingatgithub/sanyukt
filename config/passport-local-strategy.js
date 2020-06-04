@@ -6,13 +6,13 @@ const User = require('../models/user');
 
 //authentication using passport..
 
-let passportCallback = async function(email, password, done){
+let passportCallback = async function(req, email, password, done){
     //find user and establish identity..
     try{
     let user = await User.findOne({email: email})
         if(!user || user.password != password)
         {
-            console.log('Invalid Username/Password');
+            req.flash('error', 'Invalid Username/Password');
             return done(null, false);
         }
         return done(null, user);
@@ -24,7 +24,8 @@ let passportCallback = async function(email, password, done){
 }
 
 passport.use(new LocalStrategy({
-    usernameField: 'email'
+    usernameField: 'email',
+    passReqToCallback: true
     }, passportCallback));   
     
 
