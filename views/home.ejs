@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<head>
-    <title><%= title %></title>
-</head>
-<body>
-    <h1><%= title%></h1>
+
+   <h1><%= title%></h1>
     <section id="feed-posts">
         <h4>Posts</h4>
         <%if(locals.user){%>        <%#show form only user logged in%>
@@ -13,53 +9,17 @@
         </form>
         <%}%>
         <div id="post-list-box">
-            <ul>
-                <%for(post of posts){%>
-                    <p>
-                        <%if(locals.user && locals.user.id == post.user.id){%>
-                        <small>
-                            <a href="/posts/destroy/<%= post.id%>">X</a>
-                        </small>
-                        <%}%>
-                        <%= post.content%>
-                        <br>
-                        <small>
-                            <%= post.user.name%>
-                        </small>
-                    </p>
-                    <div id="post-comments">
-                        <%if (locals.user){%>
-                            <form action="/comments/create" method="POST" id="post-form">
-                                <input type="text" name="content" placeholder="add your comments here.." required/>
-                                <input type="hidden" name="post" value="<%= post._id%>" />
-                                <input type="submit" value="Add Comment" />
-                            </form>
-                        <%}%>
-                        <div class="post-comments-list">
-                            <ul id="post-comments-<%= post._id%>">
-                                <%for (comment of post.comments){%>
-                                    <p>
-                                        
-                                        <%if(locals.user && locals.user.id == comment.user.id){%>
-                                            <small>
-                                                <a href="/comments/destroy/<%= comment.id%>">X</a>
-                                            </small>
-                                        <%}%>
-                                        <%= comment.content%>
-                                        <br>
-                                        <small>
-                                            <%= comment.user.name%>
-                                        </small>
-                                    </p>
-                                <%}%>
-                            </ul>
-                        </div>
-                    </div>
-                    <%}%>
-            </ul>
+            <%-include('_posts')-%>
         </div>
+    </section>
+        <h4>Friends</h4>
+        <%for (u of all_users){%>
+            <p>
+                <a href="/users/profile/<%= u.id%>"><%= u.name%></a>
+            </p>
+        <%}%>
+    <section>
+
     </section>
 
     <a href="/users/profile"> open your profile</a>
-</body>
-</html>
