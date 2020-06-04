@@ -8,8 +8,14 @@
             <input type="submit" value="Post">
         </form>
         <%}%>
-        <div id="post-list-box">
+        <div id="posts-list-box">
+            <ul>
+            <%for(post of posts){%>
+
             <%-include('_posts')-%>
+
+            <%}%>
+            </ul>
         </div>
     </section>
         <h4>Friends</h4>
@@ -21,3 +27,5 @@
     <section>
 
     </section>
+
+    <script rel="javascript" src="/js/home_posts.js"></script>
