@@ -1,47 +1,45 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 
-module.exports.create = function(req, res){
-    Post.findById(req.body.post, function(err, post){
+module.exports.create = async function(req, res){
+    try{
+    let post = await Post.findById(req.body.post)
         if(post){
-            Comment.create({
+            let comment = await Comment.create({
                 content: req.body.content,
                 post: req.body.post,
                 user: req.user._id
-            }, function(er, comment){
-                if(err){
-                    console.log("can't post comment");
-                    return res.redirect('back');
-                }
-                post.comments.push(comment);
-                post.save();
-                res.redirect('/');
             })
+
+            post.comments.push(comment);
+            post.save();
+            res.redirect('/');
         }
-    })
+    }
+    catch(err){
+        return res.redirect('back');
+    }
 }
 
 //deleting a comment....
-module.exports.destroy = function(req, res){
-    Comment.findById(req.params.id, function(err, comment){
-        // let postId = comment.post;
-        // var userId;
-        // Post.findById(postId, function(err, post){
-        //     userId = post.user;    //just accessing the first field of user key that is id...
-        // })
-        if(comment.user == req.user.id){
+module.exports.destroy = async function(req, res){
+    try{
+    let comment = await Comment.findById(req.params.id)
+    if(comment.user == req.user.id){
             
-            let postId = comment.post;  //saving the post id in order to remove from array stored in post...
+        let postId = comment.post;  //saving the post id in order to remove from array stored in post...
 
-            comment.remove();
+        comment.remove();
 
-            Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}}, function(err, post){
-                return res.redirect('back');
-            })
+       let post= await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}})
+       return res.redirect('back');
 
-        }
-        else{
-            return res.redirect('back');
-        }
-    })
+    }
+    else{
+        return res.redirect('back');
+    }
+    }
+    catch(err){
+        console.log('Error', err);
+    }
 }
