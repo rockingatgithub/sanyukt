@@ -30,6 +30,9 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 app.use(express.static('./assets'));
+//making /uploads available to requests...
+app.use('/uploads', express.static(`${__dirname}/uploads`));
+
 //extract syles and scripts..
 //use express-ejs-layouts..
 app.use(expressLayouts);
