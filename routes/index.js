@@ -7,8 +7,8 @@ router.use('/users', require('./users'));  // as this file is used as main file 
 router.use('/posts', require('./posts'));  //posts file used for posting..
 router.use('/comments', require('./comments'));
 router.use('/api', require('./api'));
+router.use('/likes', require('./likes'));
 
-
-console.log('route is working');
+// console.log('route is working');
 
 module.exports = router ;

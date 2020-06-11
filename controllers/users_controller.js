@@ -16,6 +16,7 @@ module.exports.profile =async function(req, res){
     }
 }
 
+
 module.exports.update =async function(req, res){
     if(req.user.id == req.params.id){
         try{
@@ -49,6 +50,7 @@ module.exports.update =async function(req, res){
         }
     }
     else{
+        req.flash('error', 'Unauthorized!');
         return res.status(401).send('Unauthorized');
     }
 }
@@ -89,6 +91,7 @@ module.exports.create = async function(req, res){
             return res.redirect('/users/signin');
         }
         else{
+            req.flash('success', 'You have signed up, login to continue!');
             return res.redirect('back');
         }
     }

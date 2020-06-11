@@ -1,5 +1,7 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
+
 module.exports.create = async function(req, res){
     try{
     let post = await Post.create({
@@ -8,6 +10,9 @@ module.exports.create = async function(req, res){
     });
 
     if(req.xhr){
+
+        post = await post.populate('user', 'name').execPopulate();
+
         return res.status(200).json({
             data: {
                 post: post
@@ -21,7 +26,7 @@ module.exports.create = async function(req, res){
     }
     catch(err){
         console.log('Error', err);
-        return;
+        return res.redirect('back');
     }
 }
 
@@ -31,6 +36,11 @@ module.exports.destroy = async function(req, res){
     let post= await Post.findById(req.params.id)
     //.id is to get id as string......
     if(post.user == req.user.id){
+
+        //delete the associated likes for post , it's likes and comments and it's likes....
+        await Like.deleteMany({likeable: post, onModel: 'Post'});
+        await Like.deleteMany({_id: {$in: post.comments}});
+
         post.remove();
 
         let comment=await Comment.deleteMany({
@@ -50,6 +60,7 @@ module.exports.destroy = async function(req, res){
         return res.redirect('back');
     }
     else{
+        req.flash('error', 'You cannot delete this post!');
         return res.redirect('back');
     }
     }

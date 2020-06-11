@@ -10,10 +10,26 @@
             <small>
                 <%= post.user.name%>
             </small>
+
+            <!-- display like with links if logged in and if not just show the likes... -->
+            <br>
+
+            <small>
+                <%if (locals.user){%>
+                    
+                    <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
+                       
+                        <%= post.likes.length %> Likes 
+                    </a>
+                <% }else{ %>
+                        <%= post.likes.length %> Likes
+                <%}%>
+            </small>
+
         </p>
         <div id="post-comments">
             <%if (locals.user){%>
-                <form action="/comments/create" method="POST" id="post-form">
+                <form action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form">
                     <input type="text" name="content" placeholder="add your comments here.." required/>
                     <input type="hidden" name="post" value="<%= post._id%>" />
                     <input type="submit" value="Add Comment" />
@@ -22,7 +38,7 @@
             <div class="post-comments-list">
                 <ul id="post-comments-<%= post._id%>">
                     <%for (comment of post.comments){%>
-                       <%-include('_comments')-%>
+                       <%-include('_comments')-%>//try now save also
                     <%}%>
                 </ul>
             </div>

@@ -3,6 +3,8 @@ const Post = require('../models/post');
 const commentsMailer = require('../mailers/comments_mailer');
 const queue = require('../config/kue');
 const commentEmailWorker = require('../workers/comment_email_worker');
+const Like = require('../models/like');
+
 
 module.exports.create = async function(req, res){
     try{
@@ -17,8 +19,8 @@ module.exports.create = async function(req, res){
             post.comments.push(comment);
             post.save();
 
-            let comments = await comment.populate('user', 'name email').execPopulate();
-            console.log(comments);
+            comment = await comment.populate('user', 'name email').execPopulate();
+            // console.log(comment);
             // commentsMailer.newComment(comments);
             //push sending job mail to kue.....
             //create queue with name emails....
@@ -63,11 +65,25 @@ module.exports.destroy = async function(req, res){
         comment.remove();
 
        let post= await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
+
+
+        await Like.deleteMany({likeable: comment._id, onModel: 'Comment'});
+
+        if (req.xhr){
+            return res.status(200).json({
+                data: {
+                    comment_id: req.params.id
+                },
+                message: "Post deleted"
+            });
+        }
+
+
        req.flash('success', 'comment deleted successfully');
        return res.redirect('back');
-
     }
     else{
+        req.flash('error', 'Unauthorized');
         return res.redirect('back');
     }
     }
