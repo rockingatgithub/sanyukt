@@ -3,7 +3,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const cssnano = require('gulp-cssnano');
 const rev = require('gulp-rev');
-const uglify= require('gulp-uglify-es');
+const uglify= require('gulp-uglify-es').default;
 const imagemin= require('gulp-imagemin');
 const del = require('del');
 
