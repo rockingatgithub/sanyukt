@@ -61,4 +61,4 @@ const production = {
     }
 }
 
-module.exports = eval(process.env.SANYUKT_ENVIRONMENT) == undefined ? development : eval(process.env.SANYUKT_ENVIRONMENT);
+module.exports = eval(process.env.SANYUKT_ENVIRONMENT) === undefined ? development : eval(process.env.SANYUKT_ENVIRONMENT);
