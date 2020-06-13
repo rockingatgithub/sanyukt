@@ -22,8 +22,8 @@ const development = {
         port: 587,
         secure: false,
         auth: {
-            user: 'cyberkingsid@gmail.com',
-            pass: 'Raja@2509'
+            user: 'sidproductionmail@gmail.com',
+            pass: '2509@Course'
         }
     },
     google_client_id: "419536015092-7md7csdcss45prfes7h89cp0a18uaq1t.apps.googleusercontent.com",
@@ -61,4 +61,4 @@ const production = {
     }
 }
 
-module.exports = eval(process.env.SANYUKT_ENVIRONMENT) == undefined ? development : eval(process.env.SANYUKT_ENVIRONMENT);
+module.exports = eval(process.env.SANYUKT_ENVIRONMENT) === undefined ? development : eval(process.env.SANYUKT_ENVIRONMENT);
