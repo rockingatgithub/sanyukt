@@ -22,7 +22,7 @@ const development = {
         port: 587,
         secure: false,
         auth: {
-            user: 'sidproductionmail.com',
+            user: 'sidproductionmail@gmail.com',
             pass: '2509@Course'
         }
     },
