@@ -38,7 +38,7 @@ if(env.name == 'development'){
     }))
 }
 //middlewares below
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 
 app.use(cookieParser());
 

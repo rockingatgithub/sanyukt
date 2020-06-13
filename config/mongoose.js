@@ -1,6 +1,6 @@
 const mongoose= require('mongoose');
 const env = require('./environment')
-mongoose.connect(`mongodb://localhost/${env.db}`);
+mongoose.connect(`mongodb://localhost/${env.db}`, {useUnifiedTopology: true});
 
 const db= mongoose.connection;
 
