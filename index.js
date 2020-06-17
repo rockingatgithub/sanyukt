@@ -1,9 +1,9 @@
 const express = require('express');
-const env = require('./config/environment');
-const logger = require('morgan');
+// const env = require('./config/environment');
+// const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const app = express();
-require('./config/view-helpers')(app);
+// require('./config/view-helpers')(app);
 
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
@@ -14,11 +14,14 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportJWT = require('./config/passport-jwt-strategy');
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
+
+
 const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
-const passportGoogle = require('./config/passport-google-oauth2-strategy');
+
 
 //setup the chat server to be used with socket.io.....
 const chatServer = require('http').Server(app);
@@ -28,25 +31,25 @@ console.log('chat server is listening on port 5000');
 const path = require('path');
 
 //convert all sass before starting of server..
-if(env.name == 'development'){
+// if(env.name == 'development'){
     app.use(sassMiddleware({
-        src: path.join(__dirname, env.asset_path, 'scss'),
-        dest: path.join(__dirname, env.asset_path, 'css'),
+        src: './assets/scss',
+        dest: './assets/css',
         debug: true,
         outputStyle: 'extended',
         prefix: '/css'
     }))
-}
+// }
 //middlewares below
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded());
 
 app.use(cookieParser());
 
-app.use(express.static(env.asset_path));
+app.use(express.static('./assets'));
 //making /uploads available to requests...
 app.use('/uploads', express.static(`${__dirname}/uploads`));
 
-app.use(logger(env.morgan.mode, env.morgan.options))
+// app.use(logger(env.morgan.mode, env.morgan.options))
 
 //extract syles and scripts..
 //use express-ejs-layouts..
@@ -64,7 +67,7 @@ app.set('views', './views');
 app.use(session({
     name:'sanyukt',
     //todo change secret before deployment..
-    secret: env.session_cookie_key,
+    secret: 'blahsomething',
     saveUninitialized: false,
     resave: false,
     cookie:{

@@ -29,10 +29,10 @@ class PostComments{
 
             $.ajax({
                 type: 'post',
-                url: '/comment/create',
+                url: '/comments/create',
                 data: $(self).serialize(),
                 success: function(data){
-                    let newComment = pSelf.newCommnetDom(data.data.comment);
+                    let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
 
@@ -53,7 +53,7 @@ class PostComments{
         });
     }
 
-    newCommnetDom(comment){
+    newCommentDom(comment){
         //show count of zero lkes on this comment....
 
         return $(`<li id="comment-${comment._id}">
