@@ -2,6 +2,9 @@ header {
   display: flex;
   margin: 0;
   background: linear-gradient(to right, #3e5151, #decba4); }
+  header #home-link {
+    text-decoration: none;
+    color: black; }
   header #auth-title {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.5rem;

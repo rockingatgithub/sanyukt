@@ -1,0 +1,4 @@
+#home-container {
+  display: inline-block; }
+  #home-container #feed-posts {
+    margin-top: -18%; }

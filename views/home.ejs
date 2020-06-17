@@ -1,8 +1,10 @@
 
-
+    <link rel="stylesheet" href="/css/home.css" />
    <link rel="stylesheet" href="/css/chat_box.css" />
-   <h1><%= title%></h1>
    <div id="home-container">
+    <section>   
+        <%- include('_friend_list')%>
+    </section>
     <section id="feed-posts">
         <h4>Posts</h4>
         <%if(locals.user){%>        <%#show form only user logged in%>
@@ -11,6 +13,7 @@
             <input type="submit" value="Post">
         </form>
         <%}%>
+
         <div id="posts-list-box">
             <ul>
 
@@ -22,17 +25,14 @@
             </ul>
         </div>
     </section>
-        <h4>Friends</h4>
-        <%for (u of all_users){%>
-            <p>
-                <a href="/users/profile/<%= u.id%>"><%= u.name%></a>
-            </p>
-        <%}%>
-    <section>
-
-    </section>
-    <%- include('_chat_box') -%>
 </div>
+
+
+
+<section>
+    <%- include('_chat_box') -%>
+</section>
+
     <script src="/js/home_post_comments.js"></script>
     <script src="/js/home_posts.js"> </script>
 
