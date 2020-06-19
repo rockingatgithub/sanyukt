@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const User = require('../models/user');
+const Chat = require('../models/chat');
 
 
 module.exports.home = async function(req, res){
@@ -19,12 +20,15 @@ module.exports.home = async function(req, res){
             }
         }).populate('likes');
 
+        let chats = await Chat.find({})
+        .populate('user');
         
         let users = await User.find({});
         return res.render('home', {
             title: 'Sanyukt | Home',
             posts: posts,
-            all_users: users
+            all_users: users,
+            chats: chats
         });
         }
     catch(err){

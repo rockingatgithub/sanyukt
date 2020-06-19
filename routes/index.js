@@ -8,6 +8,7 @@ router.use('/posts', require('./posts'));  //posts file used for posting..
 router.use('/comments', require('./comments'));
 router.use('/api', require('./api'));
 router.use('/likes', require('./likes'));
+router.use('/chats', require('./chats'));
 
 // console.log('route is working');
 

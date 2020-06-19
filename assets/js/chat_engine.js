@@ -27,7 +27,9 @@ class ChatEngine{
             });
             
             //function to emit a message on button click....
-            $('#send-message').click(function(){
+            $('#send-message').click(function(e){
+                e.preventDefault();
+
                 let msg = $('#chat-message-input').val();
                 if(msg != ''){
                     // console.log('clicked',msg);
@@ -37,6 +39,7 @@ class ChatEngine{
                         chatroom: 'sanyukt'
                     });
                 }
+
             });
 
 
