@@ -1,7 +1,56 @@
 <link rel="stylesheet" href="/css/friends.css" />
 <div id="friend-container">
-    <h4>Friends</h4>
-    <%for (u of all_users){%>
-        <a href="/users/profile/<%= u.id%>" class="friend-names"><%= u.name%></a>
+    <%if(locals.user){%>
+        <h4>Suggested Friends</h4>
+        <%for (u of all_users){%>
+            <%if(locals.user.id !== u.id){%>
+            <a href="/users/profile/<%= u.id%>" class="friend-names">
+                <%= u.name%>
+            </a>
+            <a href="/users/friends/suggestions/<%= u.id%>">Add friend</a>
+            <br/>
+            <%}%>
+        <%}%>
+        <h4>
+            Pending Requests
+            <h5>
+                Received Request
+                <%for (u of rec_request){%>
+                    <a href="/users/profile/<%= u.from_user.id%>" class="friend-names">
+                        <%= u.from_user.name%>
+                    </a>
+                    <a href="/users/friends/accept/<%= u.from_user.id%>">Accept</a>
+                    <a href="/users/friends/cancel/<%= u.from_user.id%>">Cancel</a>
+                    <br/>
+                <%}%>
+            </h5>
+            <h5>
+                Sent Request
+                <%for (u of sent_request){%>
+                    <a href="/users/profile/<%= u.to_user.id%>" class="friend-names">
+                        <%= u.to_user.name%>
+                    </a>
+                    <a href="/users/friends/cancel/<%= u.to_user.id%>">Cancel</a>
+                    <br/>
+                <%}%>
+            </h5>
+        </h4>
+        <h4>
+            Friends
+            <%for (u of sent_friends){%>
+                <a href="/users/profile/<%= u.to_user.id%>" class="friend-names">
+                    <%= u.to_user.name%>
+                </a>
+                <a href="/users/friends/remove/<%= u.to_user.id%>">Remove</a>
+                <br/>
+            <%}%>
+            <%for (u of received_friends){%>
+                <a href="/users/profile/<%= u.from_user.id%>" class="friend-names">
+                    <%= u.from_user.name%>
+                </a>
+                <a href="/users/friends/remove/<%= u.from_user.id%>">Remove</a>
+                <br/>
+            <%}%>
+        </h4>
     <%}%>
 </div>

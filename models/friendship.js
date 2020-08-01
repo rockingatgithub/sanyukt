@@ -11,8 +11,12 @@ const friendshipSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    pending: {
+        type: Boolean,
+        required: true,
+    }
 },{
-    timestamps: true
+    timestamps: true,
 });
 
 const Friendship = mongoose.model('Friendship', friendshipSchema);
