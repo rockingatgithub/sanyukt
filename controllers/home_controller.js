@@ -24,15 +24,16 @@ module.exports.home = async function(req, res){
         let chats = await Chat.find({})
         .populate('user');
         
-        let users = [];
+        
+
+        let users = await User.find({
+        });
         let to_friends = [];
         let from_friends = [];
         let sent_friends = [];
         let received_friends = [];
         if(req.user){
-            users = await User.find({
-                
-            });
+
             to_friends = await Friendship.find({
                 from_user: req.user._id,
                 pending: true,

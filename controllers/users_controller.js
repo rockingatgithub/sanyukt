@@ -87,7 +87,13 @@ module.exports.create = async function(req, res){
     try{
         let user =await User.findOne({email: req.body.email});
         if(!user){
-            let user=await User.create(req.body)
+            let user=await User.create({
+                email: req.body.email,
+                name: req.body.name,
+                password: req.body.password,
+                userType: req.params.userType,  
+            }
+                )
             return res.redirect('/users/signin');
         }
         else{

@@ -1,15 +1,51 @@
+<link rel="stylesheet" href="/css/home.css" />
+<link rel="stylesheet" href="/css/chat_box.css" />
+   
+<div id="home-container">
+    
+    <section>  
+        <h1>People You May Know</h1>
+        <%for(u of all_users){%>
+            <%if(u.userType === 'celebs'){%>
+                <a href="/users/profile/<%= u.id%>" class="friend-names">
+                    <%= u.name%>
+                </a>
+                <a href="/users/friends/suggestions/<%= u.id%>">Follow</a>
+                <br/>
+            <%}%>
+        <%}%>
 
-    <link rel="stylesheet" href="/css/home.css" />
-   <link rel="stylesheet" href="/css/chat_box.css" />
-   <div id="home-container">
-    <section>   
-        <%- include('_friend_list')%>
+
+        <br/>
+        <br/>
+
+
+        <%if(locals.user){%>
+
+            <%- include('_friend_list')%>
+        
+        <%}%>
+
     </section>
+
+
     <section id="feed-posts">
         <h4>Posts</h4>
         <%if(locals.user){%>        <%#show form only user logged in%>
-        <form action="/posts/create" id="new-post-form" method="POST">
+        <form action="/posts/create/text" id="new-post-form" method="POST">
             <textarea name="content" cols="30" rows="3" required></textarea>
+            <input type="submit" value="Post">
+        </form>
+
+        <form action="/posts/create/image" id="new-post-image" method="POST" enctype="multipart/form-data">
+            <input name="file" type="file" placeholder="Upload Image" />
+            <input name="content" placeholder="Caption" value="video" required />
+            <input type="submit" value="Post">
+        </form>
+
+        <form action="/posts/create/video" id="new-post-video" method="POST" enctype="multipart/form-data">
+            <input name="file" type="file" placeholder="Upload Video" />
+            <input name="content" placeholder="Caption" value="video" required />
             <input type="submit" value="Post">
         </form>
         <%}%>

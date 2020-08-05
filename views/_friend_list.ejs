@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/friends.css" />
 <div id="friend-container">
-    <%if(locals.user){%>
+   
         <h4>Suggested Friends</h4>
         <%for (u of all_users){%>
             <%if(locals.user.id !== u.id){%>
@@ -52,5 +52,5 @@
                 <br/>
             <%}%>
         </h4>
-    <%}%>
+   
 </div>

@@ -9,7 +9,7 @@
 
             $.ajax({
                 type: 'post',
-                url: '/posts/create',
+                url: '/posts/create/text',
                 data: newPostForm.serialize(),
                 success: function(data){
                     let newPost = newPostDom(data.data.post);

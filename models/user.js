@@ -23,7 +23,12 @@ const userSchema = new mongoose.Schema({
     friendships: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Friendship'
-    }]
+    }],
+    userType: {
+        type: String,
+        enum: ['user', 'celebs'],
+        // default: 'user', 
+    }
 }, {
     timestamps: true
 });

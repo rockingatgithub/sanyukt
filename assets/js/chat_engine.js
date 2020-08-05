@@ -67,6 +67,12 @@ class ChatEngine{
 
                 $('#chat-messages-list').append(newMessage);
 
+                let box = document.getElementById('chat-messages-list');
+                let chat_input = document.getElementById('chat-message-input');
+                box.scrollTop = box.scrollHeight;
+                chat_input.value = '';
+                // chat_input.focus();
+
             })
 
 
