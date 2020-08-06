@@ -4,6 +4,11 @@ const likeSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId
     },
+
+    // content:{
+    //     type: String,
+    //     required: true,
+    // },
     //this defines of object id of like object....
     likeable: {
         type: mongoose.Schema.Types.ObjectId,

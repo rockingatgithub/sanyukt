@@ -30,7 +30,9 @@
 
 
     <section id="feed-posts">
-        <h4>Posts</h4>
+        <h4>Posts
+            <!-- <p>&#128512;</p> -->
+        </h4>
         <%if(locals.user){%>        <%#show form only user logged in%>
         <form action="/posts/create/text" id="new-post-form" method="POST">
             <textarea name="content" cols="30" rows="3" required></textarea>
@@ -38,13 +40,13 @@
         </form>
 
         <form action="/posts/create/image" id="new-post-image" method="POST" enctype="multipart/form-data">
-            <input name="file" type="file" placeholder="Upload Image" />
+            <input name="imageVideo" type="file" placeholder="Upload Image" />
             <input name="content" placeholder="Caption" value="video" required />
             <input type="submit" value="Post">
         </form>
 
         <form action="/posts/create/video" id="new-post-video" method="POST" enctype="multipart/form-data">
-            <input name="file" type="file" placeholder="Upload Video" />
+            <input name="imageVideo" type="file" placeholder="Upload Video" />
             <input name="content" placeholder="Caption" value="video" required />
             <input type="submit" value="Post">
         </form>
@@ -83,6 +85,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="/js/chat_engine.js"></script>
     <script src="/js/chat_store.js"></script>
+    <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
     <%if(locals.user){%>
     <script>
         new ChatEngine('user-chat-box', '<%= locals.user.email%>')

@@ -29,7 +29,7 @@ module.exports.create = async function(req, res){
         }
         else
         {
-            console.log('executed', req.body);
+            // console.log('executed', req.body);
             let post = await Post.create({
                 content: 'media',
                 user: req.user._id,
@@ -47,12 +47,11 @@ module.exports.create = async function(req, res){
                     
                     //this is saving the path of the uploaded file into the media field in the post...
                     post.imageVideo = Post.mediaPath + '/' + req.file.filename;
+                    console.log(Post.mediaPath + " "+ post.imageVideo + " " + req.file.filename);
                 }
-               
+                post.save();
+                return res.redirect('back');
             });
-            post.save();
-            return res.redirect('back');
-
         }
     }
     catch(err){

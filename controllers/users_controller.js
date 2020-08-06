@@ -2,6 +2,8 @@ const User = require('../models/user');
 const Post = require('../models/post');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
+
 
 module.exports.profile =async function(req, res){
     try{    
@@ -121,3 +123,4 @@ module.exports.destroySession = function(req, res){
     req.flash('success', "Logged-out successfully");
     return res.redirect('/');
 }
+
