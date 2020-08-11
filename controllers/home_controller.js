@@ -20,7 +20,7 @@ module.exports.home = async function(req, res){
                 path: 'likes'
             }
         }).populate('likes');
-
+        // console.log(posts[1].likes.user);
         let chats = await Chat.find({})
         .populate('user');
         

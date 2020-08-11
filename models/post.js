@@ -27,7 +27,13 @@ const postSchema = new mongoose.Schema({
     likes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Like'
-    }]
+    }],
+
+    userReactionMap: {
+        type: Map,
+        // default: new Map()
+    }
+
 },{
     timestamps:true
 }

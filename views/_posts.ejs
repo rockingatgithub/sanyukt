@@ -19,7 +19,7 @@
                         preload="auto"
                         width="640"
                         height="264"
-                        poster="MY_VIDEO_POSTER.jpg"
+                        poster=""
                         data-setup="{}"
                     >
                         <source src="<%= post.imageVideo%>" type="video/mp4" />
@@ -43,15 +43,38 @@
             <!-- display like with links if logged in and if not just show the likes... -->
             <br>
 
-            <small>
+            <small class="likebox">
                 <%if (locals.user){%>
-                    
-                    <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
-                       
-                        <%= post.likes.length %> Likes 
+                    <div class="likeOptions">
+                        <a href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like">
+                            👍
+                        </a>
+                        <a href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love">
+                            ❤️
+                        </a>
+                        <a href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=haha">
+                            😆
+                        </a>
+                        <a href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=anger">
+                            😡
+                        </a>
+                        <a href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=sad">
+                            ☹️
+                        </a>
+                    </div>
+                    <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love">
+                        
+                        <%= post.likes.length %> 
+                        <span class="emojis-post">
+                            <% if(post.userReactionMap === 'undefined' || post.userReactionMap.size === 0){%>
+                            👍🏻
+                            <%}else{%>
+                                <%= post.userReactionMap.get(locals.user.id)%>
+                            <%}%>
+                        </span>
                     </a>
                 <% }else{ %>
-                        <%= post.likes.length %> Likes
+                    <%= post.likes.length %> <span class="emojis-post">👍</span>
                 <%}%>
             </small>
 

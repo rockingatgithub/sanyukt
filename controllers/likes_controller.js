@@ -25,6 +25,17 @@ module.exports.toggleLike = async function(req, res){
 
             existingLike.remove();
             deleted = true;
+            if(req.query.type === 'Post'){
+                let getEntity = await Post.findById(req.query.id);
+                await getEntity.userReactionMap.delete(`${req.user._id}`);
+                getEntity.save();
+            }
+            else{
+                let getEntity = await Comment.findById(req.query.id);
+                await getEntity.userReactionMap.delete(`${req.user._id}`);
+                getEntity.save();
+            }
+            
         }
         else{
             //else create a new like......
@@ -36,18 +47,40 @@ module.exports.toggleLike = async function(req, res){
 
             likeable.likes.push(newLike._id);
             likeable.save();
+
+            //add like reaction to post or comment......
+            if(req.query.type === 'Post'){
+                let getEntity = await Post.findById(req.query.id);
+                if(getEntity.userReactionMap === undefined){
+                    getEntity.userReactionMap = new Map();
+                }
+                await getEntity.userReactionMap.set(`${req.user._id}`,`${req.query.reaction}`);
+                getEntity.save();
+            }
+            else{
+                let getEntity = await Comment.findById(req.query.id);
+                if(getEntity.userReactionMap === undefined){
+                    getEntity.userReactionMap = new Map();
+                }
+                await getEntity.userReactionMap.set(`${req.user._id}`,`${req.query.reaction}`);
+                getEntity.save();
+            }
         }
 
-        return res.json(200, {
-            message: 'Request successfull!',
-            data: {
-                deleted: deleted
-            }
-        });
+        return res.redirect('back');
+
+        // return res.json(200, {
+        //     message: 'Request successfull!',
+        //     data: {
+        //         deleted: deleted
+        //     }
+        // });
     }
     catch(err){
-        return res.json(401,{
-            message:"Internal Server Error"
-        })
+        console.log(err);
+        return res.redirect('back');
+        // return res.json(401,{
+        //     message:"Internal Server Error"
+        // })
     }
 }
