@@ -8,20 +8,10 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true    //so that it must be saved..
     },
-
-    postType: {
-        type: String,
-        enum: ['text', 'video', 'image']
-    },
-    imageVideo: {
-        type: String,
-    },
-
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-
     //include the array of ids of all comments in this post schema itself...
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -31,7 +21,13 @@ const postSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Like'
     }],
-
+    postType: {
+        type: String,
+        enum: ['text', 'video', 'image']
+    },
+    imageVideo: {
+        type: String,
+    },
     userReactionMap: {
         type: Map,
         // default: new Map()

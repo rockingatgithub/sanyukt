@@ -77,10 +77,9 @@ module.exports.destroy = async function(req, res){
             post: req.params.id
         });
 
-        console.log(comment);
+        // console.log(comment);
 
         if(req.xhr){
-            // console.log('yeah bro');
             return res.status(200).json({
                 data: {
                     post_id: req.params.id
