@@ -54,7 +54,24 @@
             </small>
             <br>
             <small>
-                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+            <div class="likeOptions">
+            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
+                <span class="emojis-post">👍</span>
+            </a>
+            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
+                <span class="emojis-post">❤️</span>
+            </a>
+            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
+                <span class="emojis-post">😆</span>
+            </a>
+            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
+                <span class="emojis-post">😡</span>
+            </a>
+            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
+                <span class="emojis-post">☹️</span>
+            </a>
+        </div>
+                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
                 0 Likes
                 </a>
             </small>
@@ -83,7 +100,8 @@
                 type: 'get',
                 url: $(deleteLink).prop('href'),
                 success: function(data){
-                    $(`#post-${data.data.post._id}`).remove();
+                    console.log(data);
+                    $(`#post-${data.data.post_id}`).remove();
                     new Noty({
                         theme: 'relax',
                         text: "Post Deleted",

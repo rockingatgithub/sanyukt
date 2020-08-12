@@ -15,6 +15,7 @@ module.exports.toggleLike = async function(req, res){
 
         //check if like already exits....
         let existingLike = await Like.findOne({
+            likeType: req.query.reaction,
             likeable: req.query.id,
             onModel: req.query.type,
             user: req.user._id
@@ -40,6 +41,7 @@ module.exports.toggleLike = async function(req, res){
         else{
             //else create a new like......
             let newLike = await Like.create({
+                likeType: req.query.reaction,
                 user: req.user._id,
                 likeable: req.query.id,
                 onModel: req.query.type
@@ -67,20 +69,21 @@ module.exports.toggleLike = async function(req, res){
             }
         }
 
-        return res.redirect('back');
+        // return res.redirect('back');
 
-        // return res.json(200, {
-        //     message: 'Request successfull!',
-        //     data: {
-        //         deleted: deleted
-        //     }
-        // });
+        return res.status(200).json({
+            message: 'Request successfull!',
+            data: {
+                deleted: deleted,
+                likeType: req.query.reaction,
+            }
+        });
     }
     catch(err){
         console.log(err);
-        return res.redirect('back');
-        // return res.json(401,{
-        //     message:"Internal Server Error"
-        // })
+        // return res.redirect('back');
+        return res.status(401).json({
+            message:"Internal Server Error"
+        })
     }
 }

@@ -5,6 +5,7 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    
     //comment belong to user and posts..
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -19,9 +20,11 @@ const commentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Like'
     }],
+
     userReactionMap: {
         type: Map,
-    }
+    },
+    
 },{
     timestamps: true
 });

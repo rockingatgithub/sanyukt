@@ -8,10 +8,7 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true    //so that it must be saved..
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
+
     postType: {
         type: String,
         enum: ['text', 'video', 'image']
@@ -19,6 +16,12 @@ const postSchema = new mongoose.Schema({
     imageVideo: {
         type: String,
     },
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+
     //include the array of ids of all comments in this post schema itself...
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -32,7 +35,7 @@ const postSchema = new mongoose.Schema({
     userReactionMap: {
         type: Map,
         // default: new Map()
-    }
+    },
 
 },{
     timestamps:true

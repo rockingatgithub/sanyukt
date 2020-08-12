@@ -15,7 +15,24 @@
     <!-- dispaly the likes of this comment, if user is logged in show links and if not just show the number..-->
     <small>
         <%if (locals.user){%>
-            <a class="toggle-like-button" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment">
+            <div class="likeOptions">
+                <a class="toggle-like-button" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=like">
+                    <span class="emojis-post"> <%= comment.likes.length %>👍</span>
+                </a>
+                <a class="toggle-like-button" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=love">
+                    <span class="emojis-post"> <%= comment.likes.length %>❤️</span>
+                </a>
+                <a class="toggle-like-button" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=haha">
+                    <span class="emojis-post"> <%= comment.likes.length %>😆</span>
+                </a>
+                <a class="toggle-like-button" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=anger">
+                    <span class="emojis-post"> <%= comment.likes.length %>😡</span>
+                </a>
+                <a class="toggle-like-button" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=sad">
+                    <span class="emojis-post"> <%= comment.likes.length %>☹️</span>
+                </a>
+            </div>
+            <a class="toggle-like-button" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=like">
                 
                     <%= comment.likes.length %> <span class="emojis-comment">👍</span>
             </a>
