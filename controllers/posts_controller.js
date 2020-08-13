@@ -36,7 +36,7 @@ module.exports.create = async function(req, res){
                 postType: req.params.type,
             });
 
-            Post.uploadedMedia(req, res, function(err){
+            Post.uploadedMedia(req, res, async function(err){
                 if(err){
                     console.log('*****Multer Error', err);
                 }
@@ -49,7 +49,20 @@ module.exports.create = async function(req, res){
                     post.imageVideo = Post.mediaPath + '/' + req.file.filename;
                     console.log(Post.mediaPath + " "+ post.imageVideo + " " + req.file.filename);
                 }
-                post.save();
+                await post.save();
+
+                if(req.xhr){
+
+                    post = await post.populate('user', 'name').execPopulate();
+    
+                    return res.status(200).json({
+                        data: {
+                            post: post
+                        },
+                        message: "Post created!"
+                    });
+               }
+
                 return res.redirect('back');
             });
         }

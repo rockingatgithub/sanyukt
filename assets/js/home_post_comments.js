@@ -67,7 +67,7 @@ class PostComments{
                             <small>
                                 ${comment.user.name}
                             </small>
-                            <small>
+                            <small class="likebox">
                                 <div class="likeOptions">
                                 <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=like">
                                     <span class="emojis-post">👍</span>

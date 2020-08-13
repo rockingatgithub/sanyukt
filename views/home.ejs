@@ -42,13 +42,13 @@
         <form action="/posts/create/image" id="new-post-image" method="POST" enctype="multipart/form-data">
             <input name="imageVideo" type="file" placeholder="Upload Image" />
             <input name="content" placeholder="Caption" value="video" required />
-            <input type="submit" value="Post">
+            <input type="submit" value="Post" id="imagePostSubmit">
         </form>
 
         <form action="/posts/create/video" id="new-post-video" method="POST" enctype="multipart/form-data">
             <input name="imageVideo" type="file" placeholder="Upload Video" />
             <input name="content" placeholder="Caption" value="video" required />
-            <input type="submit" value="Post">
+            <input type="submit" value="Post" id="videoPostSubmit>
         </form>
         <%}%>
 
