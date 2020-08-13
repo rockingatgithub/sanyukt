@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
 
+
+let newMap = new Map();
+newMap.set('like', 0);
+newMap.set('haha', 0);
+newMap.set('anger', 0);
+newMap.set('love', 0);
+newMap.set('sad', 0);
+
 const commentSchema = new mongoose.Schema({
     content: {
         type: String,
@@ -23,6 +31,8 @@ const commentSchema = new mongoose.Schema({
 
     userReactionMap: {
         type: Map,
+        of: Number,
+        default: newMap,
     },
     
 },{

@@ -69,8 +69,8 @@ module.exports.destroy = async function(req, res){
 
         //delete the associated likes for post , it's likes and comments and it's likes....
         await Like.deleteMany({likeable: post, onModel: 'Post'});
-        await Like.deleteMany({_id: {$in: post.comments}});
-
+        await Like.deleteMany({likeable: {$in: post.comments}});
+        // await Like.deleteMany({ likeable: $isDeleted(true) });
         post.remove();
 
         let comment=await Comment.deleteMany({

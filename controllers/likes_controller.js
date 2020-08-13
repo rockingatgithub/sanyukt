@@ -28,12 +28,14 @@ module.exports.toggleLike = async function(req, res){
             deleted = true;
             if(req.query.type === 'Post'){
                 let getEntity = await Post.findById(req.query.id);
-                await getEntity.userReactionMap.delete(`${req.user._id}`);
+                let pval = await getEntity.userReactionMap.get(`${req.query.reaction}`);
+                await getEntity.userReactionMap.set(`${req.query.reaction}`, pval-1);
                 getEntity.save();
             }
             else{
                 let getEntity = await Comment.findById(req.query.id);
-                await getEntity.userReactionMap.delete(`${req.user._id}`);
+                let pval = await getEntity.userReactionMap.get(`${req.query.reaction}`);
+                await getEntity.userReactionMap.set(`${req.query.reaction}`, pval-1);
                 getEntity.save();
             }
             
@@ -53,18 +55,14 @@ module.exports.toggleLike = async function(req, res){
             //add like reaction to post or comment......
             if(req.query.type === 'Post'){
                 let getEntity = await Post.findById(req.query.id);
-                if(getEntity.userReactionMap === undefined){
-                    getEntity.userReactionMap = new Map();
-                }
-                await getEntity.userReactionMap.set(`${req.user._id}`,`${req.query.reaction}`);
+                let pval = await getEntity.userReactionMap.get(`${req.query.reaction}`);
+                await getEntity.userReactionMap.set(`${req.query.reaction}`, pval+1);
                 getEntity.save();
             }
             else{
                 let getEntity = await Comment.findById(req.query.id);
-                if(getEntity.userReactionMap === undefined){
-                    getEntity.userReactionMap = new Map();
-                }
-                await getEntity.userReactionMap.set(`${req.user._id}`,`${req.query.reaction}`);
+                let pval = await getEntity.userReactionMap.get(`${req.query.reaction}`);
+                await getEntity.userReactionMap.set(`${req.query.reaction}`, pval+1);
                 getEntity.save();
             }
         }

@@ -55,25 +55,22 @@
             <br>
             <small>
             <div class="likeOptions">
-            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
+            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
                 <span class="emojis-post">👍</span>
             </a>
-            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
+            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
                 <span class="emojis-post">❤️</span>
             </a>
-            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
+            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
                 <span class="emojis-post">😆</span>
             </a>
-            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
+            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
                 <span class="emojis-post">😡</span>
             </a>
-            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
+            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
                 <span class="emojis-post">☹️</span>
             </a>
         </div>
-                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
-                0 Likes
-                </a>
             </small>
         </p>
         <div id="post-comments">
@@ -83,7 +80,7 @@
                     <input type="submit" value="Add Comment" />
                 </form>
             <div class="post-comments-list">
-                <ul id="post-comments- ${post._id}">
+                <ul id="post-comments-${post._id}">
                     
                 </ul>
             </div>

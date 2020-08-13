@@ -46,33 +46,23 @@
             <small class="likebox">
                 <%if (locals.user){%>
                     <div class="likeOptions">
-                        <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like">
-                            <span class="emojis-post"><%= post.likes.length %>👍</span>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('like') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like">
+                            <span class="emojis-post"><%= post.userReactionMap.get('like') %>👍</span>
                         </a>
-                        <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love">
-                            <span class="emojis-post"><%= post.likes.length %>❤️</span>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('love') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love">
+                            <span class="emojis-post"><%= post.userReactionMap.get('love') %>❤️</span>
                         </a>
-                        <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=haha">
-                            <span class="emojis-post"><%= post.likes.length %>😆</span>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('haha') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=haha">
+                            <span class="emojis-post"><%= post.userReactionMap.get('haha') %>😆</span>
                         </a>
-                        <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=anger">
-                            <span class="emojis-post"><%= post.likes.length %>😡</span>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('anger') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=anger">
+                            <span class="emojis-post"><%= post.userReactionMap.get('anger') %>😡</span>
                         </a>
-                        <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=sad">
-                            <span class="emojis-post"><%= post.likes.length %>☹️</span>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('sad') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=sad">
+                            <span class="emojis-post"><%= post.userReactionMap.get('sad') %>☹️</span>
                         </a>
                     </div>
-                    <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like">
-                        
-                        <%= post.likes.length %> 
-                        <span class="emojis-post">
-                            <% if(post.userReactionMap === undefined || post.userReactionMap.size === 0){%>
-                            👍🏻
-                            <%}else{%>
-                                <%= post.userReactionMap.get(locals.user.id)%>
-                            <%}%>
-                        </span>
-                    </a>
+                    
                 <% }else{ %>
                     <%= post.likes.length %> <span class="emojis-post">👍</span>
                 <%}%>

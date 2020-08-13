@@ -68,26 +68,23 @@ class PostComments{
                                 ${comment.user.name}
                             </small>
                             <small>
-                            <div class="likeOptions">
-                            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=like">
-                                <span class="emojis-post">👍</span>
-                            </a>
-                            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=love">
-                                <span class="emojis-post">❤️</span>
-                            </a>
-                            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=haha">
-                                <span class="emojis-post">😆</span>
-                            </a>
-                            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=anger">
-                                <span class="emojis-post">😡</span>
-                            </a>
-                            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=sad">
-                                <span class="emojis-post">☹️</span>
-                            </a>
-                            </div>
+                                <div class="likeOptions">
                                 <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=like">
-                                    0 Likes
+                                    <span class="emojis-post">👍</span>
                                 </a>
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=love">
+                                    <span class="emojis-post">❤️</span>
+                                </a>
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=haha">
+                                    <span class="emojis-post">😆</span>
+                                </a>
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=anger">
+                                    <span class="emojis-post">😡</span>
+                                </a>
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=sad">
+                                    <span class="emojis-post">☹️</span>
+                                </a>
+                                </div>
                             </small>
                         </p>
 

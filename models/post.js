@@ -3,6 +3,13 @@ const multer = require('multer');
 const path = require('path');
 const MEDIA_PATH = path.join('/uploads/users/mediaPosts');
 
+let newMap = new Map();
+newMap.set('like', 0);
+newMap.set('haha', 0);
+newMap.set('anger', 0);
+newMap.set('love', 0);
+newMap.set('sad', 0);
+
 const postSchema = new mongoose.Schema({
     content: {
         type: String,
@@ -30,7 +37,8 @@ const postSchema = new mongoose.Schema({
     },
     userReactionMap: {
         type: Map,
-        // default: new Map()
+        of: Number,
+        default: newMap
     },
 
 },{
