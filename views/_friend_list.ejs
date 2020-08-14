@@ -7,50 +7,58 @@
             <a href="/users/profile/<%= u.id%>" class="friend-names">
                 <%= u.name%>
             </a>
-            <a href="/users/friends/suggestions/<%= u.id%>">Add friend</a>
+            <a href="/users/friends/suggestions/<%= u.id%>" class="friends-request">Add friend</a>
             <br/>
             <%}%>
         <%}%>
         <h4>
             Pending Requests
             <h5>
+                <ul id="received-requests-list">
                 Received Request
                 <%for (u of rec_request){%>
                     <a href="/users/profile/<%= u.from_user.id%>" class="friend-names">
                         <%= u.from_user.name%>
                     </a>
-                    <a href="/users/friends/accept/<%= u.from_user.id%>">Accept</a>
-                    <a href="/users/friends/cancel/<%= u.from_user.id%>">Cancel</a>
+                    <a href="/users/friends/accept/<%= u.from_user.id%>" class="accept-request">Accept</a>
+                    <a href="/users/friends/cancel/<%= u.from_user.id%>" class="reject-request">Cancel</a>
                     <br/>
                 <%}%>
+            </ul>
             </h5>
             <h5>
                 Sent Request
+                <ul id="sent-requests-list">
                 <%for (u of sent_request){%>
                     <a href="/users/profile/<%= u.to_user.id%>" class="friend-names">
                         <%= u.to_user.name%>
                     </a>
-                    <a href="/users/friends/cancel/<%= u.to_user.id%>">Cancel</a>
+                    <a href="/users/friends/cancel/<%= u.to_user.id%>" class="cancel-request">Cancel</a>
                     <br/>
                 <%}%>
+            </ul>
             </h5>
         </h4>
         <h4>
             Friends
+            <ul id="sent-friends-list">
             <%for (u of sent_friends){%>
                 <a href="/users/profile/<%= u.to_user.id%>" class="friend-names">
                     <%= u.to_user.name%>
                 </a>
-                <a href="/users/friends/remove/<%= u.to_user.id%>">Remove</a>
+                <a href="/users/friends/remove/<%= u.to_user.id%>" class="remove-sent-request">Remove</a>
                 <br/>
             <%}%>
-            <%for (u of received_friends){%>
-                <a href="/users/profile/<%= u.from_user.id%>" class="friend-names">
-                    <%= u.from_user.name%>
-                </a>
-                <a href="/users/friends/remove/<%= u.from_user.id%>">Remove</a>
-                <br/>
-            <%}%>
+            </ul>
+            <ul id="received-friends-list">
+                <%for (u of received_friends){%>
+                    <a href="/users/profile/<%= u.from_user.id%>" class="friend-names">
+                        <%= u.from_user.name%>
+                    </a>
+                    <a href="/users/friends/remove/<%= u.from_user.id%>" class="remove-received-request">Remove</a>
+                    <br/>
+                <%}%>
+            </ul>
         </h4>
    
 </div>

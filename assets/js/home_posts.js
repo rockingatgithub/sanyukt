@@ -1,137 +1,130 @@
 //edit for adding comments using ajax.....
 {
     //method to submit post using ajax....
-    let createPost = function(){
-        let newPostForm = $('#new-post-form');
+    let createPost = function () {
+        let newPostForm = $('#new-post-form')
 
-        newPostForm.submit(function(e){
-            e.preventDefault();
+        newPostForm.submit(function (e) {
+            e.preventDefault()
 
             $.ajax({
                 type: 'post',
                 url: '/posts/create/text',
                 data: newPostForm.serialize(),
-                success: function(data){
-                    let newPost = newPostDom(data.data.post);
-                    $('#posts-list-box>ul').prepend(newPost);
-                    deletePost($(' .delete-post-button', newPost));   //space before .delete... represent it's inside form...
+                success: function (data) {
+                    let newPost = newPostDom(data.data.post)
+                    $('#posts-list-box>ul').prepend(newPost)
+                    deletePost($(' .delete-post-button', newPost)) //space before .delete... represent it's inside form...
                     // console.log(data);
                     //call the create comment class....
-                    new PostComments(data.data.post._id);
-                    
+                    new PostComments(data.data.post._id)
+
                     //enable the functionality of the toggle like buttton....
-                    new ToggleLike($(' .toggle-like-button', newPost));
+                    new ToggleLike($(' .toggle-like-button', newPost))
 
                     new Noty({
                         theme: 'relax',
-                        text: "Post published!",
+                        text: 'Post published!',
                         type: 'success',
                         layout: 'topRight',
-                        timeout: 1500
-                        
-                    }).show();
-
+                        timeout: 1500,
+                    }).show()
                 },
-                error:function(error){
-                    console.log(error.responseText);
-                }
-            });
-        });
+                error: function (error) {
+                    console.log(error.responseText)
+                },
+            })
+        })
     }
 
     //method to create a image post......
 
-    let createImagePost = function(){
-        $('#imagePostSubmit').click( function(event){
-            event.preventDefault();
-            let newPostForm = $('#new-post-image')[0];
-            let newPostData = new FormData(newPostForm);
-            $("#imagePostSubmit").prop("disabled", true);
+    let createImagePost = function () {
+        $('#imagePostSubmit').click(function (event) {
+            event.preventDefault()
+            let newPostForm = $('#new-post-image')[0]
+            let newPostData = new FormData(newPostForm)
+            $('#imagePostSubmit').prop('disabled', true)
 
-                $.ajax({
-                    type: 'post',
-                    url: '/posts/create/image',
-                    enctype: 'multipart/form-data',
-                    data: newPostData,
-                    processData: false,     //prevent jquery to tranform data to query string.....
-                    contentType: false,
-                    cache: false,
-                    timeout: 600000,
-                    success: function(data){
-                        let newPost = newImagePostDom(data.data.post);
-                        $('#posts-list-box>ul').prepend(newPost);
-                        deletePost($(' .delete-post-button', newPost));   //space before .delete... represent it's inside form...
-                        // console.log(data);
-                        //call the create comment class....
-                        new PostComments(data.data.post._id);
-                        
-                        //enable the functionality of the toggle like buttton....
-                        new ToggleLike($(' .toggle-like-button', newPost));
+            $.ajax({
+                type: 'post',
+                url: '/posts/create/image',
+                enctype: 'multipart/form-data',
+                data: newPostData,
+                processData: false, //prevent jquery to tranform data to query string.....
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    let newPost = newImagePostDom(data.data.post)
+                    $('#posts-list-box>ul').prepend(newPost)
+                    deletePost($(' .delete-post-button', newPost)) //space before .delete... represent it's inside form...
+                    // console.log(data);
+                    //call the create comment class....
+                    new PostComments(data.data.post._id)
 
-                        new Noty({
-                            theme: 'relax',
-                            text: "Post published!",
-                            type: 'success',
-                            layout: 'topRight',
-                            timeout: 1500
-                            
-                        }).show();
+                    //enable the functionality of the toggle like buttton....
+                    new ToggleLike($(' .toggle-like-button', newPost))
 
-                    },
-                    error:function(error){
-                        console.log(error.responseText);
-                    }
-                });
-        });
-    } 
+                    new Noty({
+                        theme: 'relax',
+                        text: 'Post published!',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500,
+                    }).show()
+                },
+                error: function (error) {
+                    console.log(error.responseText)
+                },
+            })
+        })
+    }
 
-    let createVideoPost = function(){
-        $('#videoPostSubmit').click( function(event){
-            event.preventDefault();
-            let newPostForm = $('#new-post-video')[0];
-            let newPostData = new FormData(newPostForm);
-            $("#videoPostSubmit").prop("disabled", true);
-            console.log('I ran');
-                $.ajax({
-                    type: 'post',
-                    url: '/posts/create/video',
-                    enctype: 'multipart/form-data',
-                    data: newPostData,
-                    processData: false,     //prevent jquery to tranform data to query string.....
-                    contentType: false,
-                    cache: false,
-                    timeout: 600000,
-                    success: function(data){
-                        let newPost = newVideoPostDom(data.data.post);
-                        $('#posts-list-box>ul').prepend(newPost);
-                        deletePost($(' .delete-post-button', newPost));   //space before .delete... represent it's inside form...
-                        // console.log(data);
-                        //call the create comment class....
-                        new PostComments(data.data.post._id);
-                        
-                        //enable the functionality of the toggle like buttton....
-                        new ToggleLike($(' .toggle-like-button', newPost));
+    let createVideoPost = function () {
+        $('#videoPostSubmit').click(function (event) {
+            event.preventDefault()
+            let newPostForm = $('#new-post-video')[0]
+            let newPostData = new FormData(newPostForm)
+            $('#videoPostSubmit').prop('disabled', true)
+            console.log('I ran')
+            $.ajax({
+                type: 'post',
+                url: '/posts/create/video',
+                enctype: 'multipart/form-data',
+                data: newPostData,
+                processData: false, //prevent jquery to tranform data to query string.....
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    let newPost = newVideoPostDom(data.data.post)
+                    $('#posts-list-box>ul').prepend(newPost)
+                    deletePost($(' .delete-post-button', newPost)) //space before .delete... represent it's inside form...
+                    // console.log(data);
+                    //call the create comment class....
+                    new PostComments(data.data.post._id)
 
-                        new Noty({
-                            theme: 'relax',
-                            text: "Post published!",
-                            type: 'success',
-                            layout: 'topRight',
-                            timeout: 1500
-                            
-                        }).show();
+                    //enable the functionality of the toggle like buttton....
+                    new ToggleLike($(' .toggle-like-button', newPost))
 
-                    },
-                    error:function(error){
-                        console.log(error.responseText);
-                    }
-                });
-        });
-    } 
-
+                    new Noty({
+                        theme: 'relax',
+                        text: 'Post published!',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500,
+                    }).show()
+                },
+                error: function (error) {
+                    console.log(error.responseText)
+                },
+            })
+        })
+    }
 
     //method to create a post in DOM...
-    let newPostDom =  function(post){
+    let newPostDom = function (post) {
         //show the count of zero likes on this post....
         return $(`<li id="post-${post._id}">
         <p>
@@ -165,7 +158,7 @@
             </small>
         </p>
         <div id="post-comments">
-                <form action="/comments/create" method="POST" id="post-${ post._id}-comments-form">
+                <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
                     <input type="text" name="content" placeholder="add your comments here.." required/>
                     <input type="hidden" name="post" value="${post._id}" />
                     <input type="submit" value="Add Comment" />
@@ -179,8 +172,9 @@
 </li>`)
     }
 
-     //post DOM for image post....
-    let newImagePostDom = function(post){
+    //post DOM for image post....
+
+    let newImagePostDom = function (post) {
         return $(`<li id="post-${post._id}">
         <p>
             <small>
@@ -216,7 +210,7 @@
             </small>
         </p>
         <div id="post-comments">
-                <form action="/comments/create" method="POST" id="post-${ post._id}-comments-form">
+                <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
                     <input type="text" name="content" placeholder="add your comments here.." required/>
                     <input type="hidden" name="post" value="${post._id}" />
                     <input type="submit" value="Add Comment" />
@@ -227,11 +221,10 @@
                 </ul>
             </div>
         </div>
-</li>`)
+    </li>`)
     }
 
-
-    let newVideoPostDom = function(post){
+    let newVideoPostDom = function (post) {
         return $(`<li id="post-${post._id}">
         <p>
             <small>
@@ -286,7 +279,7 @@
             </small>
         </p>
         <div id="post-comments">
-                <form action="/comments/create" method="POST" id="post-${ post._id}-comments-form">
+                <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
                     <input type="text" name="content" placeholder="add your comments here.." required/>
                     <input type="hidden" name="post" value="${post._id}" />
                     <input type="submit" value="Add Comment" />
@@ -297,53 +290,50 @@
                 </ul>
             </div>
         </div>
-</li>`)
+    </li>`)
     }
 
     //method to delete a post from DOM...
-    let deletePost = function(deleteLink){
-        $(deleteLink).click(function(e){
-            e.preventDefault();
+    let deletePost = function (deleteLink) {
+        $(deleteLink).click(function (e) {
+            e.preventDefault()
 
             $.ajax({
                 type: 'get',
                 url: $(deleteLink).prop('href'),
-                success: function(data){
-                    console.log(data);
-                    $(`#post-${data.data.post_id}`).remove();
+                success: function (data) {
+                    console.log(data)
+                    $(`#post-${data.data.post_id}`).remove()
                     new Noty({
                         theme: 'relax',
-                        text: "Post Deleted",
+                        text: 'Post Deleted',
                         type: 'success',
                         layout: 'topRight',
-                        timeout: 1500
-                        
-                    }).show();
+                        timeout: 1500,
+                    }).show()
                 },
-                error: function(error){
-                    console.log(error.responseText);
-                }
-            });
-        });
+                error: function (error) {
+                    console.log(error.responseText)
+                },
+            })
+        })
     }
 
-    let convertPostsToAjax = function(){
-        $('#posts-list-box>ul>li').each(function(){
-            let self = $(this);
-            let deleteButton = $(' .delete-post-button', self);
-            deletePost(deleteButton);
+    let convertPostsToAjax = function () {
+        $('#posts-list-box>ul>li').each(function () {
+            let self = $(this)
+            let deleteButton = $(' .delete-post-button', self)
+            deletePost(deleteButton)
 
             //get post's id by splitting the id attribute
-            let postId = self.prop('id').split("-")[1]
-            new PostComments(postId);
-        });
+            let postId = self.prop('id').split('-')[1]
+            new PostComments(postId)
+        })
     }
 
-    
-    
-    createPost();
-    createImagePost();
-    createVideoPost();
-    convertPostsToAjax();
+    createPost()
+    createImagePost()
+    createVideoPost()
+    convertPostsToAjax()
 }
-//actuallu comment.likes is undefined..that is y it is not reading it
+//actualluy comment.likes is undefined..that is y it is not reading it
