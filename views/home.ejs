@@ -84,6 +84,30 @@
     })
 </script>
 
+<script src="/js/friend_request.js"></script>
+<script>
+    $('.friends-request').each(function () {
+        let self = this
+        let friendRequest = new FriendRequest(self)
+    })
+    $('.accept-request').each(function () {
+        let self = this
+        let friendRequest = new AcceptRequest(self)
+    })
+    $('.reject-request').each(function () {
+        let self = this
+        let friendRequest = new RejectRequest(self)
+    })
+    $('.cancel-request').each(function () {
+        let self = this
+        let friendRequest = new CancelRequest(self)
+    })
+    $('.remove-sent-request').each(function () {
+        let self = this
+        let friendRequest = new RemoveSentRequest(self)
+    })
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script src="/js/chat_engine.js"></script>
 <script src="/js/chat_store.js"></script>
