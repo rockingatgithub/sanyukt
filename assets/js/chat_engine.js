@@ -51,7 +51,7 @@ class ChatEngine{
 
                 let messageType = 'other-message';
 
-                if(data.user_email == self.userEmail){
+                if(data.user_email === self.userEmail){
                     messageType = 'self-message';
                 }
 
