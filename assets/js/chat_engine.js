@@ -27,7 +27,9 @@ class ChatEngine{
             });
             
             //function to emit a message on button click....
-            $('#send-message').click(function(){
+            $('#send-message').click(function(e){
+                e.preventDefault();
+
                 let msg = $('#chat-message-input').val();
                 if(msg != ''){
                     // console.log('clicked',msg);
@@ -37,6 +39,7 @@ class ChatEngine{
                         chatroom: 'sanyukt'
                     });
                 }
+
             });
 
 
@@ -48,7 +51,7 @@ class ChatEngine{
 
                 let messageType = 'other-message';
 
-                if(data.user_email == self.userEmail){
+                if(data.user_email === self.userEmail){
                     messageType = 'self-message';
                 }
 
@@ -63,6 +66,12 @@ class ChatEngine{
                 newMessage.addClass(messageType);
 
                 $('#chat-messages-list').append(newMessage);
+
+                let box = document.getElementById('chat-messages-list');
+                let chat_input = document.getElementById('chat-message-input');
+                box.scrollTop = box.scrollHeight;
+                chat_input.value = '';
+                // chat_input.focus();
 
             })
 

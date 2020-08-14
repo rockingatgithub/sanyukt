@@ -1,7 +1,7 @@
 <li id="comment-<%= comment._id %>">
 <p>
                             
-    <%if(locals.user && locals.user.id == comment.user.id){%>
+    <%if(locals.user && locals.user.id === comment.user.id){%>
         <small>
             <a class="delete-comment-button" href="/comments/destroy/<%= comment.id%>">X</a>
         </small>
@@ -15,13 +15,26 @@
     <!-- dispaly the likes of this comment, if user is logged in show links and if not just show the number..-->
     <small>
         <%if (locals.user){%>
-            <a class="toggle-like-button" data-likes="<%= comment.likes.length%>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment">
-                
-                    <%= comment.likes.length %> Likes
-            </a>
+            <div class="likeOptions">
+                <a class="toggle-like-button" data-likes="<%= comment.userReactionMap.get('like') %>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=like">
+                    <span class="emojis-post"> <%= comment.userReactionMap.get('like') %> 👍</span>
+                </a>
+                <a class="toggle-like-button" data-likes="<%= comment.userReactionMap.get('love') %>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=love">
+                    <span class="emojis-post"> <%= comment.userReactionMap.get('love') %> ❤️</span>
+                </a>
+                <a class="toggle-like-button" data-likes="<%= comment.userReactionMap.get('haha') %>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=haha">
+                    <span class="emojis-post"> <%= comment.userReactionMap.get('haha') %> 😆</span>
+                </a>
+                <a class="toggle-like-button" data-likes="<%= comment.userReactionMap.get('anger') %>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=anger">
+                    <span class="emojis-post"> <%= comment.userReactionMap.get('anger') %> 😡</span>
+                </a>
+                <a class="toggle-like-button" data-likes="<%= comment.userReactionMap.get('sad') %>" href="/likes/toggle/?id=<%= comment._id%>&type=Comment&reaction=sad">
+                    <span class="emojis-post"> <%= comment.userReactionMap.get('sad') %> ☹️</span>
+                </a>
+            </div>
         <%}else{%>
             
-                <%= comment.likes.length %> Likes
+                <%= comment.likes.length %> <span class="emojis-comment">👍</span>
         <%}%>
     </small>
 </p>

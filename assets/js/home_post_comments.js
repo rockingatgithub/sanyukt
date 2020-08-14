@@ -29,10 +29,10 @@ class PostComments{
 
             $.ajax({
                 type: 'post',
-                url: '/comment/create',
+                url: '/comments/create',
                 data: $(self).serialize(),
                 success: function(data){
-                    let newComment = pSelf.newCommnetDom(data.data.comment);
+                    let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
 
@@ -53,7 +53,7 @@ class PostComments{
         });
     }
 
-    newCommnetDom(comment){
+    newCommentDom(comment){
         //show count of zero lkes on this comment....
 
         return $(`<li id="comment-${comment._id}">
@@ -67,10 +67,24 @@ class PostComments{
                             <small>
                                 ${comment.user.name}
                             </small>
-                            <small>
-                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
-                                    0 Likes
+                            <small class="likebox">
+                                <div class="likeOptions">
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=like">
+                                    <span class="emojis-post">👍</span>
                                 </a>
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=love">
+                                    <span class="emojis-post">❤️</span>
+                                </a>
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=haha">
+                                    <span class="emojis-post">😆</span>
+                                </a>
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=anger">
+                                    <span class="emojis-post">😡</span>
+                                </a>
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment&reaction=sad">
+                                    <span class="emojis-post">☹️</span>
+                                </a>
+                                </div>
                             </small>
                         </p>
 

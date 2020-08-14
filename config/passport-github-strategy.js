@@ -1,21 +1,19 @@
 const passport = require('passport');
-const googleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GitHubStrategy = require('passport-github').Strategy;
 const crypto = require('crypto');
 const User = require('../models/user');
-// const env = require('./environment');
 
-//tell passport about google strategy to use....
-passport.use(new googleStrategy({
-    clientID: "419536015092-7md7csdcss45prfes7h89cp0a18uaq1t.apps.googleusercontent.com",
-    clientSecret: "CDOD4cIAkOnQbzkTz1JpafVy",
-    callbackURL: "http://localhost:8000/users/auth/google/callback",
+
+passport.use( new GitHubStrategy({
+    clientID: '2d62d4c197660705aadd',
+    clientSecret: '655fd8692b204c731c8f68d323bd14062e6fad64',
+    callbackURL: 'http://localhost:8000/users/auth/github/callback'
 },
-    function(accessToken, refreshToken, profile, done){
-
-        //find a user.....
-        User.findOne({email: profile.emails[0].value}).exec(function(err, user){
+    function(accessToken, refreshToken, profile, done) {
+         //find a user.....
+         User.findOne({email: profile.emails[0].value}).exec(function(err, user){
             if(err){
-                console.log('error in google strategy-passport', err);
+                console.log('error in github strategy-passport', err);
                 return;
             }
             console.log(profile);
@@ -32,7 +30,7 @@ passport.use(new googleStrategy({
                     password: crypto.randomBytes(20).toString('hex'),
                 }, function(err, user){
                     if(err){
-                        console.log('error in creting user after google strategy-passport');
+                        console.log('error in creting user after github strategy-passport');
                         return;
                     }
                     return done(null, user);
@@ -40,5 +38,4 @@ passport.use(new googleStrategy({
             }
         })
     }
-
-))
+));

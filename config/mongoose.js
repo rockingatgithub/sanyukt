@@ -1,6 +1,6 @@
 const mongoose= require('mongoose');
-const env = require('./environment')
-mongoose.connect(`mongodb://localhost/${env.db}`, {useUnifiedTopology: true});
+// const env = require('./environment')
+mongoose.connect(`mongodb://localhost/sanyukt_development`, {useUnifiedTopology: true});
 
 const db= mongoose.connection;
 

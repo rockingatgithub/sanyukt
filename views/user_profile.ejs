@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="<%= assetPath('css/user_profile.css') %>"/>
+<link rel="stylesheet" href="/css/user_profile.css"/>
 <img src="<%= user.avatar%>" alt="<%=user.name%>" width="100">
 
-<%if (user.id == profile_user.id){%>
+<%if (user.id === profile_user.id){%>
     <!-- show form only when user matches -->
     <form action="/users/update/<%= profile_user.id%>" enctype="multipart/form-data" method="POST">
         <input type="text" name="name" value="<%= profile_user.name%>" placeholder="Your Name" required/>

@@ -1,9 +1,38 @@
 <li id="post-<%= post._id%>">
         <p>
-            <%if(locals.user && locals.user.id == post.user.id){%>
+            <%if(locals.user && locals.user.id === post.user.id){%>
             <small>
                 <a class="delete-post-button" href="/posts/destroy/<%= post.id%>">X</a>
             </small>
+            <%}%>
+            <%if(post.postType === 'image'){%>
+                <div>
+                    <img src="<%= post.imageVideo%>" height="100" width="100">
+                </div>
+            <%}%>
+            <%if(post.postType === 'video'){%>
+                <div>
+                    <video
+                        id="my-video"
+                        class="video-js"
+                        controls
+                        preload="auto"
+                        width="640"
+                        height="264"
+                        poster=""
+                        data-setup="{}"
+                    >
+                        <source src="<%= post.imageVideo%>" type="video/mp4" />
+                        <!-- <source src="MY_VIDEO.webm" type="video/webm" /> -->
+                        <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank"
+                            >supports HTML5 video</a
+                        >
+                        </p>
+                    </video>
+                </div>
             <%}%>
             <%= post.content%>
             <br>
@@ -14,15 +43,28 @@
             <!-- display like with links if logged in and if not just show the likes... -->
             <br>
 
-            <small>
+            <small class="likebox">
                 <%if (locals.user){%>
+                    <div class="likeOptions">
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('like') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like">
+                            <span class="emojis-post"><%= post.userReactionMap.get('like') %>👍</span>
+                        </a>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('love') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love">
+                            <span class="emojis-post"><%= post.userReactionMap.get('love') %>❤️</span>
+                        </a>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('haha') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=haha">
+                            <span class="emojis-post"><%= post.userReactionMap.get('haha') %>😆</span>
+                        </a>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('anger') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=anger">
+                            <span class="emojis-post"><%= post.userReactionMap.get('anger') %>😡</span>
+                        </a>
+                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('sad') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=sad">
+                            <span class="emojis-post"><%= post.userReactionMap.get('sad') %>☹️</span>
+                        </a>
+                    </div>
                     
-                    <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
-                       
-                        <%= post.likes.length %> Likes 
-                    </a>
                 <% }else{ %>
-                        <%= post.likes.length %> Likes
+                    <%= post.likes.length %> <span class="emojis-post">👍</span>
                 <%}%>
             </small>
 

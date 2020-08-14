@@ -23,7 +23,12 @@ const userSchema = new mongoose.Schema({
     friendships: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Friendship'
-    }]
+    }],
+    userType: {
+        type: String,
+        enum: ['user', 'celebs'],
+        // default: 'user', 
+    }
 }, {
     timestamps: true
 });
@@ -42,5 +47,4 @@ userSchema.statics.uploadedAvatar = multer({storage: storage}).single('avatar');
 userSchema.statics.avatarPath = AVATAR_PATH;
 
 const User = mongoose.model('User', userSchema);
-
 module.exports = User;

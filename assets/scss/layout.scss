@@ -1,11 +1,17 @@
 body{
     margin: 0;
-    // text-align: center;
-    // margin-left: 20%;
-
-    #layout-main{
-        color: burlywood;
-        background: cornsilk;
-    }
-
+    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+    text-decoration: none;
 }
+
+.emoji-post{
+    font-size: 24px;
+}
+
+.emoji-comment{
+    font-size: 20px;
+}
+
+// .likeOptions{
+//     display: none;
+// }

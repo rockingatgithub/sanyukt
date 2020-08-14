@@ -12,20 +12,38 @@ class ToggleLike{
 
             //this is a new way of writing ajax this is for toggle likes ....i know 
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: $(self).attr('href'),
             })
             .done(function(data){
                 let likesCount = parseInt($(self).attr('data-likes'));
-                console.log(likesCount);
-                if(data.data.deleted == true){
+                if(data.data.deleted == true && likesCount != 0){
                     likesCount -= 1;
                 }else{
                     likesCount += 1;
                 }
-
+                console.log(likesCount);
                 $(self).attr('data-likes', likesCount);
-                $(self).html(`${likesCount} Likes`);
+                let emoji = '👍🏻';
+                if(data.data.likeType === 'love'){
+                    emoji = '❤️'
+                }
+                else if(data.data.likeType === 'haha')
+                {
+                    emoji = '😆'
+                }
+                else if(data.data.likeType === 'anger')
+                {
+                    emoji='😡'
+                }
+                else if(data.data.likeType === 'sad'){
+                    emoji = '☹️'
+                }
+                else
+                {
+                    emoji = '👍'
+                }
+                $(self).html(`${likesCount} ${emoji}`);
             })
             .fail(function(errData){
                 console.log('error in completing the request', errData);

@@ -1,53 +1,116 @@
+<link rel="stylesheet" href="/css/home.css" />
+<link rel="stylesheet" href="/css/chat_box.css" />
 
+<div id="home-container">
+    <section>
+        <h1>People You May Know</h1>
+        <%for(u of all_users){%> <%if(u.userType === 'celebs'){%>
+        <a href="/users/profile/<%= u.id%>" class="friend-names">
+            <%= u.name%>
+        </a>
+        <a href="/users/friends/suggestions/<%= u.id%>">Follow</a>
+        <br />
+        <%}%> <%}%>
 
-   <link rel="stylesheet" href="<%= assetPath('css/chat_box.css') %>" />
-   <h1><%= title%></h1>
-   <div id="home-container">
+        <%if(locals.user){%> <%- include('_friend_list')%> <%}%>
+    </section>
+
     <section id="feed-posts">
         <h4>Posts</h4>
-        <%if(locals.user){%>        <%#show form only user logged in%>
-        <form action="/posts/create" id="new-post-form" method="POST">
+        <%if(locals.user){%> <%#show form only user logged in%>
+        <form action="/posts/create/text" id="new-post-form" method="POST">
             <textarea name="content" cols="30" rows="3" required></textarea>
-            <input type="submit" value="Post">
+            <input type="submit" value="Post" />
+        </form>
+
+        <form
+            action="/posts/create/image"
+            id="new-post-image"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+            <input name="imageVideo" type="file" placeholder="Upload Image" />
+            <input
+                name="content"
+                placeholder="Caption"
+                value="video"
+                required
+            />
+            <input type="submit" value="Post" id="imagePostSubmit" />
+        </form>
+
+        <form
+            action="/posts/create/video"
+            id="new-post-video"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+            <input name="imageVideo" type="file" placeholder="Upload Video" />
+            <input
+                name="content"
+                placeholder="Caption"
+                value="video"
+                required
+            />
+            <input type="submit" value="Post" id="videoPostSubmit" />
         </form>
         <%}%>
+
         <div id="posts-list-box">
             <ul>
-
-            <%for(post of posts){%>
-
-            <%- include('_posts') -%>
-
-            <%}%>
+                <%for(post of posts){%> <%- include('_posts') -%> <%}%>
             </ul>
         </div>
     </section>
-        <h4>Friends</h4>
-        <%for (u of all_users){%>
-            <p>
-                <a href="/users/profile/<%= u.id%>"><%= u.name%></a>
-            </p>
-        <%}%>
-    <section>
-
-    </section>
-    <%- include('_chat_box') -%>
 </div>
-    <script src="<%= assetPath('js/home_post_comments.js')%>"></script>
-    <script src="<%= assetPath('js/home_posts.js')%>"> </script>
 
-    <!-- import the script file for toggle likes, also run it over already present posts and comments  -->
-    <script src="<%= assetPath('js/toggle_likes.js')%>"></script>
-    <script>
-        $('.toggle-like-button').each(function(){
-            let self = this;
-            let toggleLike = new ToggleLike(self);
-        });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="<%= assetPath('js/chat_engine.js')%>"></script>
-    <%if(locals.user){%>
-    <script>
-        new ChatEngine('user-chat-box', '<%= locals.user.email%>')
-    </script>
-    <%}%>
+<section>
+    <%- include('_chat_box') -%>
+</section>
+
+<script src="/js/home_post_comments.js"></script>
+<script src="/js/home_posts.js"></script>
+
+<!-- import the script file for toggle likes, also run it over already present posts and comments  -->
+
+<script src="/js/toggle_likes.js"></script>
+<script>
+    $('.toggle-like-button').each(function () {
+        let self = this
+        let toggleLike = new ToggleLike(self)
+    })
+</script>
+
+<script src="/js/friend_request.js"></script>
+<script>
+    $('.friends-request').each(function () {
+        let self = this
+        let friendRequest = new FriendRequest(self)
+    })
+    $('.accept-request').each(function () {
+        let self = this
+        let friendRequest = new AcceptRequest(self)
+    })
+    $('.reject-request').each(function () {
+        let self = this
+        let friendRequest = new RejectRequest(self)
+    })
+    $('.cancel-request').each(function () {
+        let self = this
+        let friendRequest = new CancelRequest(self)
+    })
+    $('.remove-sent-request').each(function () {
+        let self = this
+        let friendRequest = new RemoveSentRequest(self)
+    })
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+<script src="/js/chat_store.js"></script>
+<script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+<%if(locals.user){%>
+<script>
+    new ChatEngine('user-chat-box', '<%= locals.user.email%>')
+</script>
+<%}%>

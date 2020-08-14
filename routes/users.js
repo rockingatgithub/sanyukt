@@ -3,13 +3,15 @@ const router = express.Router();
 const passport = require('passport');
 
 const usersController = require('../controllers/users_controller');
+const friendsController = require('../controllers/friendsController');
 router.get('/profile/:id', passport.checkAuthentication, usersController.profile);
+router.use('/friends', require('./friends'));
 router.post('/update/:id', passport.checkAuthentication, usersController.update);
 router.get('/signup', usersController.signup);
 
 router.get('/signin', usersController.signin);
 
-router.post('/create', usersController.create);
+router.post('/create/:userType', usersController.create);
 
 router.post('/create-session', passport.authenticate(
     'local',
@@ -23,5 +25,12 @@ router.get('/auth/google', passport.authenticate('google', {scope: ['profile', '
 router.get('/auth/google/callback', passport.authenticate('google', {
     failureRedirect: '/users/signin'
 }), usersController.createSession);
+
+
+router.get('/auth/github', passport.authenticate('github', {scope: ['read:user']}));
+router.get('/auth/github/callback', passport.authenticate('github', {
+    failureRedirect: '/users/signin'
+}), usersController.createSession);
+
 
 module.exports = router;

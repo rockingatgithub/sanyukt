@@ -1,5 +1,10 @@
 body {
-  margin: 0; }
-  body #layout-main {
-    color: burlywood;
-    background: cornsilk; }
+  margin: 0;
+  background: linear-gradient(to right, #bdc3c7, #2c3e50);
+  text-decoration: none; }
+
+.emoji-post {
+  font-size: 24px; }
+
+.emoji-comment {
+  font-size: 20px; }
