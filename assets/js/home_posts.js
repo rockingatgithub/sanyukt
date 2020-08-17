@@ -78,7 +78,9 @@
                     console.log(error.responseText)
                 },
             })
+            $('#imagePostSubmit').prop('disabled', false)
         })
+        
     }
 
     let createVideoPost = function () {
@@ -120,6 +122,7 @@
                     console.log(error.responseText)
                 },
             })
+            $('#videoPostSubmit').prop('disabled', false)
         })
     }
 
@@ -159,9 +162,11 @@
         </p>
         <div id="post-comments">
                 <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
-                    <input type="text" name="content" placeholder="add your comments here.." required/>
+                <div class="form-group">
+                    <input type="text" name="content" placeholder="add your comments here.." class="form-control" required/>
+                </div>
                     <input type="hidden" name="post" value="${post._id}" />
-                    <input type="submit" value="Add Comment" />
+                    <input type="submit" value="Add Comment" class="btn btn-primary" />
                 </form>
             <div class="post-comments-list">
                 <ul id="post-comments-${post._id}">
@@ -211,9 +216,11 @@
         </p>
         <div id="post-comments">
                 <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
-                    <input type="text" name="content" placeholder="add your comments here.." required/>
+                    <div class="form-group">
+                        <input type="text" name="content" placeholder="add your comments here.." class="form-control" required/>
+                    </div>
                     <input type="hidden" name="post" value="${post._id}" />
-                    <input type="submit" value="Add Comment" />
+                    <input type="submit" value="Add Comment" class="btn btn-primary" />
                 </form>
             <div class="post-comments-list">
                 <ul id="post-comments-${post._id}">
@@ -280,9 +287,11 @@
         </p>
         <div id="post-comments">
                 <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
-                    <input type="text" name="content" placeholder="add your comments here.." required/>
-                    <input type="hidden" name="post" value="${post._id}" />
-                    <input type="submit" value="Add Comment" />
+                <div class="form-group">    
+                <input type="text" name="content" placeholder="add your comments here.." class="form-control" required/>
+                </div>    
+                <input type="hidden" name="post" value="${post._id}" />
+                    <input type="submit" value="Add Comment" class="btn btn-primary" />
                 </form>
             <div class="post-comments-list">
                 <ul id="post-comments-${post._id}">

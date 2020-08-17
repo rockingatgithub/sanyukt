@@ -5,7 +5,9 @@
     <a href="/users/profile/<%= u.id%>" class="friend-names">
         <%= u.name%>
     </a>
-    <a href="/users/friends/suggestions/<%= u.id%>" class="friends-request"
+    <a
+        href="/users/friends/suggestions/<%= u.id%>"
+        class="friends-request btn btn-primary btn-sm"
         >Add friend</a
     >
     <br />
@@ -24,12 +26,12 @@
                     </a>
                     <a
                         href="/users/friends/accept/<%= u.from_user.id%>"
-                        class="accept-request"
+                        class="accept-request btn btn-primary btn-sm"
                         >Accept</a
                     >
                     <a
                         href="/users/friends/cancel/<%= u.from_user.id%>"
-                        class="reject-request"
+                        class="reject-request btn btn-primary btn-sm"
                         >Cancel</a
                     >
                     <br />
@@ -50,7 +52,7 @@
                     </a>
                     <a
                         href="/users/friends/cancel/<%= u.to_user.id%>"
-                        class="cancel-request"
+                        class="cancel-request btn btn-primary btn-sm"
                     >
                         Cancel
                     </a>
@@ -73,7 +75,7 @@
                 </a>
                 <a
                     href="/users/friends/remove/<%= u.to_user.id%>"
-                    class="remove-sent-request"
+                    class="remove-sent-request btn btn-primary btn-sm"
                     >Remove</a
                 >
                 <br />
@@ -88,7 +90,7 @@
                 </a>
                 <a
                     href="/users/friends/remove/<%= u.from_user.id%>"
-                    class="remove-sent-request"
+                    class="remove-sent-request btn btn-primary btn-sm"
                     >Remove</a
                 >
                 <br />

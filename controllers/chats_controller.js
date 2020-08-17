@@ -10,14 +10,14 @@ module.exports.create = async function (req, res) {
 
         let chat = await newChat.populate('content', 'user').execPopulate()
 
-        return res.json(200, {
+        return res.status(200).json({
             message: 'message sent',
             data: {
                 chat: chat,
             },
         })
     } catch (err) {
-        return res.json(401, {
+        return res.status(200).json({
             message: 'Internal Server Error',
         })
     }

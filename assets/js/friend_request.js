@@ -48,7 +48,7 @@ class FriendRequest {
                     <a href="/users/profile/${friend._id}" class="friend-names">
                     ${friend.name}
                     </a>
-                    <a href="/users/friends/cancel/${friend._id}" class="cancel-request">Cancel</a>
+                    <a href="/users/friends/cancel/${friend._id}" class="cancel-request btn btn-primary btn-sm">Cancel</a>
                     <br/>
                     </div>`)
     }
@@ -98,7 +98,7 @@ class AcceptRequest {
                     <a href="/users/profile/${friend._id}" class="friend-names">
                     ${friend.name}
                     </a>
-                    <a href="/users/friends/remove/${friend._id}" class="remove-sent-request">Remove</a>
+                    <a href="/users/friends/remove/${friend._id}" class="remove-sent-request btn btn-primary btn-sm">Remove</a>
                 <br/>
                 </div>`)
     }

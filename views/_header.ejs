@@ -1,20 +1,24 @@
 <header>
-    <h1 id="site-title"><a href="/" id="home-link">Sanyukt</a></h1> 
-    <ul id="auth-links">
+    <ul id="auth-links" class="nav nav-tabs justify-content-end">
+        <li class="nav-items">
+            <h1 id="site-title"><a href="/" id="home-link">Sanyukt</a></h1>
+        </li>
         <%if(locals.user){%>
-            <li>
-                <a href ="/users/profile/<%= user.id%>"><%= user.name%></a>
-            </li>
-            <li>
-                <a href="/users/signout">Sign out</a>
-            </li>
+        <li class="nav-item">
+            <a href="/users/profile/<%= user.id%>" class="nav-link"
+                ><%= user.name%></a
+            >
+        </li>
+        <li class="nav-item">
+            <a href="/users/signout" class="nav-link">Sign out</a>
+        </li>
         <%}else{%>
-            <li>
-                <a href="/users/signin">Sign In</a>
-            </li>
-            <li>
-                <a href="/users/signup">Sign up</a>
-            </li>
+        <li class="nav-item">
+            <a href="/users/signin" class="nav-link">Sign In</a>
+        </li>
+        <li class="nav-item">
+            <a href="/users/signup" class="nav-link">Sign up</a>
+        </li>
 
         <%}%>
     </ul>

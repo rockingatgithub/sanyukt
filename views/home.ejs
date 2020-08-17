@@ -3,24 +3,34 @@
 
 <div id="home-container">
     <section>
-        <h1>People You May Know</h1>
         <%for(u of all_users){%> <%if(u.userType === 'celebs'){%>
         <a href="/users/profile/<%= u.id%>" class="friend-names">
             <%= u.name%>
         </a>
-        <a href="/users/friends/suggestions/<%= u.id%>">Follow</a>
+        <a
+            href="/users/friends/suggestions/<%= u.id%>"
+            class="btn btn-secondary"
+            >Follow</a
+        >
         <br />
-        <%}%> <%}%>
-
-        <%if(locals.user){%> <%- include('_friend_list')%> <%}%>
+        <%}%> <%}%> <%if(locals.user){%> <%- include('_friend_list')%> <%}%>
     </section>
 
     <section id="feed-posts">
-        <h4>Posts</h4>
         <%if(locals.user){%> <%#show form only user logged in%>
+        <h4>Posts</h4>
         <form action="/posts/create/text" id="new-post-form" method="POST">
-            <textarea name="content" cols="30" rows="3" required></textarea>
-            <input type="submit" value="Post" />
+            <div class="form-group">
+                <textarea
+                    name="content"
+                    cols="30"
+                    rows="3"
+                    class="form-control"
+                    placeholder="What's on your mind..."
+                    required
+                ></textarea>
+            </div>
+            <input type="submit" value="Post" class="btn btn-primary" />
         </form>
 
         <form
@@ -29,14 +39,27 @@
             method="POST"
             enctype="multipart/form-data"
         >
-            <input name="imageVideo" type="file" placeholder="Upload Image" />
+            <input
+                name="imageVideo"
+                type="file"
+                placeholder="Upload Image"
+                class="form-control-file"
+            />
+            <label for="image-caption">Image:</label>
             <input
                 name="content"
                 placeholder="Caption"
-                value="video"
+                value="Image indeed"
+                id="image-caption"
+                class="form-control"
                 required
             />
-            <input type="submit" value="Post" id="imagePostSubmit" />
+            <input
+                type="submit"
+                value="Post"
+                id="imagePostSubmit"
+                class="btn btn-primary"
+            />
         </form>
 
         <form
@@ -45,14 +68,27 @@
             method="POST"
             enctype="multipart/form-data"
         >
-            <input name="imageVideo" type="file" placeholder="Upload Video" />
+            <input
+                name="imageVideo"
+                type="file"
+                placeholder="Upload Video"
+                class="form-control-file"
+            />
+            <label for="post-video">Video:</label>
             <input
                 name="content"
                 placeholder="Caption"
                 value="video"
+                class="form-control"
+                id="post-video"
                 required
             />
-            <input type="submit" value="Post" id="videoPostSubmit" />
+            <input
+                type="submit"
+                value="Post"
+                id="videoPostSubmit"
+                class="btn btn-primary"
+            />
         </form>
         <%}%>
 

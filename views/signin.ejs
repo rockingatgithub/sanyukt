@@ -1,10 +1,38 @@
-<form action="/users/create-session" method = "POST" id="signin-form">
-    <input type="email" name="email" placeholder="Enter your email" id="user-id" required/>
-    <input type="password" name="password" placeholder="Enter your password" id="user-password" required/>
-    <button type="submit" id="signup-button">Signin</button>
+<form action="/users/create-session" method="POST" id="signin-form">
+    <div class="form-group">
+        <label for="user-id">Email</label>
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            id="user-id"
+            class="form-control"
+            required
+        />
+    </div>
+    <div class="form-group">
+        <label for="user-password">Password</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            id="user-password"
+            class="form-control"
+            required
+        />
+    </div>
+    <button type="submit" id="signup-button" class="btn btn-primary">
+        Signin
+    </button>
 </form>
 
 <p>
-    <a href="/users/auth/google">Google Sign In/Sign Up</a>
-    <a href="/users/auth/github">Github Sign In/Sign Up</a>
+    <strong>Google Sign Up:</strong>
+    <a href="/users/auth/google">
+        <img src="/images/google-icon.svg" height="40px" width="40px" />
+    </a>
+    <strong>Github Sign Up:</strong>
+    <a href="/users/auth/github">
+        <img src="/images/github-1.svg" height="40px" width="40px" />
+    </a>
 </p>
