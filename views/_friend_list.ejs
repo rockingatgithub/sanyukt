@@ -1,71 +1,82 @@
 <link rel="stylesheet" href="/css/friends.css" />
 <div id="friend-container">
-    <h4>Suggested Friends</h4>
-    <%for (u of all_users){%> <%if(locals.user.id !== u.id){%>
-    <a href="/users/profile/<%= u.id%>" class="friend-names">
-        <%= u.name%>
-    </a>
-    <a
-        href="/users/friends/suggestions/<%= u.id%>"
-        class="friends-request btn btn-primary btn-sm"
-        >Add friend</a
-    >
-    <br />
-    <%}%> <%}%>
-    <h4>
-        Pending Requests
-        <h5>
-            <ul id="received-requests-list">
-                Received Request <%for (u of rec_request){%>
-                <div id="friend-recRequest-<%= u.from_user.id%>">
-                    <a
-                        href="/users/profile/<%= u.from_user.id%>"
-                        class="friend-names"
-                    >
-                        <%= u.from_user.name%>
-                    </a>
-                    <a
-                        href="/users/friends/accept/<%= u.from_user.id%>"
-                        class="accept-request btn btn-primary btn-sm"
-                        >Accept</a
-                    >
-                    <a
-                        href="/users/friends/cancel/<%= u.from_user.id%>"
-                        class="reject-request btn btn-primary btn-sm"
-                        >Cancel</a
-                    >
-                    <br />
-                </div>
-                <%}%>
-            </ul>
-        </h5>
-        <h5>
-            Sent Request
-            <ul id="sent-requests-list">
-                <%for (u of sent_request){%>
-                <div id="friend-sentRequest-<%= u.to_user.id%>">
-                    <a
-                        href="/users/profile/<%= u.to_user.id%>"
-                        class="friend-names"
-                    >
-                        <%= u.to_user.name%>
-                    </a>
-                    <a
-                        href="/users/friends/cancel/<%= u.to_user.id%>"
-                        class="cancel-request btn btn-primary btn-sm"
-                    >
-                        Cancel
-                    </a>
-                    <br />
-                </div>
-                <%}%>
-            </ul>
-        </h5>
-    </h4>
-    <h4>
+    <h5>Suggested Friends</h5>
+    <ul class="list-group list-item-top-border">
+        <%for (u of all_users){%> <%if(locals.user.id !== u.id){%>
+        <li class="list-group-item list-item-flex">
+            <a href="/users/profile/<%= u.id%>" class="friend-names">
+                <%= u.name%>
+            </a>
+            <a
+                href="/users/friends/suggestions/<%= u.id%>"
+                class="friends-request btn btn-primary btn-sm"
+                >Add friend</a
+            >
+        </li>
+        <%}%> <%}%>
+    </ul>
+    <h5>
+        Received Request
+    </h5>
+    <ul id="received-requests-list" class="list-group list-item-top-border">
+        <%for (u of rec_request){%>
+        <li class="list-group-item list-item-flex">
+            <div id="friend-recRequest-<%= u.from_user.id%>">
+                <a
+                    href="/users/profile/<%= u.from_user.id%>"
+                    class="friend-names"
+                >
+                    <%= u.from_user.name%>
+                </a>
+                <a
+                    href="/users/friends/accept/<%= u.from_user.id%>"
+                    class="accept-request btn btn-primary btn-sm"
+                    >Accept</a
+                >
+                <a
+                    href="/users/friends/cancel/<%= u.from_user.id%>"
+                    class="reject-request btn btn-primary btn-sm"
+                    >Cancel</a
+                >
+                <br />
+            </div>
+        </li>
+        <%}%>
+    </ul>
+    <h5>
+        Sent Request
+    </h5>
+    <ul id="sent-requests-list" class="list-group list-item-top-border">
+        <%for (u of sent_request){%>
+        <li class="list-group-item">
+            <div
+                id="friend-sentRequest-<%= u.to_user.id%>"
+                class="list-item-flex-div"
+            >
+                <a
+                    href="/users/profile/<%= u.to_user.id%>"
+                    class="friend-names"
+                >
+                    <%= u.to_user.name%>
+                </a>
+                <a
+                    href="/users/friends/cancel/<%= u.to_user.id%>"
+                    class="cancel-request btn btn-primary btn-sm"
+                >
+                    Cancel
+                </a>
+                <br />
+            </div>
+        </li>
+        <%}%>
+    </ul>
+
+    <h5>
         Friends
-        <ul id="current-friends-list">
-            <%for (u of sent_friends){%>
+    </h5>
+    <ul id="current-friends-list" class="list-group list-item-top-border">
+        <%for (u of sent_friends){%>
+        <li class="list-group-item list-item-flex">
             <div id="friend-box-<%= u.to_user.id%>">
                 <a
                     href="/users/profile/<%= u.to_user.id%>"
@@ -80,7 +91,9 @@
                 >
                 <br />
             </div>
-            <%}%> <%for (u of received_friends){%>
+        </li>
+        <%}%> <%for (u of received_friends){%>
+        <li class="list-group-item list-item-flex">
             <div id="friend-box-<%= u.from_user.id%>">
                 <a
                     href="/users/profile/<%= u.from_user.id%>"
@@ -95,7 +108,7 @@
                 >
                 <br />
             </div>
-            <%}%>
-        </ul>
-    </h4>
+        </li>
+        <%}%>
+    </ul>
 </div>

@@ -1,4 +1,4 @@
-<li id="post-<%= post._id%>">
+<li id="post-<%= post._id%>" class="list-group-item">
         <p>
             <%if(locals.user && locals.user.id === post.user.id){%>
             <small>
@@ -80,7 +80,7 @@
                 </form>
             <%}%>
             <div class="post-comments-list">
-                <ul id="post-comments-<%= post._id%>">
+                <ul id="post-comments-<%= post._id%>" class="list-group">
                     <%for (comment of post.comments){%>
                        <%-include('_comments')-%>
                     <%}%>

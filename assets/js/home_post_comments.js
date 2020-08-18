@@ -4,59 +4,60 @@
 //1. when the pages loads
 //2. Creation of every post dynamically via ajax...
 
-class PostComments{
+class PostComments {
     //constructor is used to initilize the instance of the class whenever a new instance is created....
-    constructor(postId){
-        this.postId = postId;
-        this.postContainer = $(`#post-${postId}`);
-        this.newCommentForm = $(`#post-${postId}-comments-form`);
+    constructor(postId) {
+        this.postId = postId
+        this.postContainer = $(`#post-${postId}`)
+        this.newCommentForm = $(`#post-${postId}-comments-form`)
 
-        this.createComment(postId);
+        this.createComment(postId)
 
-        let self = this;
+        let self = this
         //call for all the existing comments...
-        $(' .delete-comment-button', this.postContainer).each(function(){
-            self.deleteComment($(this));
-        });
-
+        $(' .delete-comment-button', this.postContainer).each(function () {
+            self.deleteComment($(this))
+        })
     }
 
-    createComment(postId){
-        let pSelf = this;
-        this.newCommentForm.submit(function(e){
-            e.preventDefault();
-            let self = this;
+    createComment(postId) {
+        let pSelf = this
+        this.newCommentForm.submit(function (e) {
+            e.preventDefault()
+            let self = this
 
             $.ajax({
                 type: 'post',
                 url: '/comments/create',
                 data: $(self).serialize(),
-                success: function(data){
-                    let newComment = pSelf.newCommentDom(data.data.comment);
-                    $(`#post-comments-${postId}`).prepend(newComment);
-                    pSelf.deleteComment($(' .delete-comment-button', newComment));
+                success: function (data) {
+                    let newComment = pSelf.newCommentDom(data.data.comment)
+                    $(`#post-comments-${postId}`).prepend(newComment)
+                    pSelf.deleteComment(
+                        $(' .delete-comment-button', newComment)
+                    )
 
                     //enabling functionality of toggle like.....
-                    new ToggleLike($(' .toggle-like-button', newComment));
+                    new ToggleLike($(' .toggle-like-button', newComment))
                     new Noty({
                         theme: 'relax',
-                        text: "Comment published!",
+                        text: 'Comment published!',
                         type: 'success',
                         layout: 'topRight',
-                        timeout: 1500
-                    }).show();
+                        timeout: 1500,
+                    }).show()
                 },
-                error: function(error){
-                    console.log(error.responseText);
-                }
-            });
-        });
+                error: function (error) {
+                    console.log(error.responseText)
+                },
+            })
+        })
     }
 
-    newCommentDom(comment){
+    newCommentDom(comment) {
         //show count of zero lkes on this comment....
 
-        return $(`<li id="comment-${comment._id}">
+        return $(`<li id="comment-${comment._id}" class="list-group-item">
                         <p>
                             <small>
                                 <a class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
@@ -88,32 +89,31 @@ class PostComments{
                             </small>
                         </p>
 
-                    </li>`);
+                    </li>`)
     }
 
-    deleteComment(deleteLink){
-        $(deleteLink).click(function(e){
-            e.preventDefault();
+    deleteComment(deleteLink) {
+        $(deleteLink).click(function (e) {
+            e.preventDefault()
 
             $.ajax({
                 type: 'get',
                 url: $(deleteLink).prop('href'),
-                success: function(data){
-                    $(`#comment-${data.data.comment_id}`).remove();
+                success: function (data) {
+                    $(`#comment-${data.data.comment_id}`).remove()
 
                     new Noty({
                         theme: 'relax',
-                        text: "Comment Deleted",
+                        text: 'Comment Deleted',
                         type: 'success',
                         layout: 'topRight',
-                        timeout: 1500
-                        
-                    }).show();
-                },error: function(error){
-                    console.log(error.responseText);
-                }
-            });
+                        timeout: 1500,
+                    }).show()
+                },
+                error: function (error) {
+                    console.log(error.responseText)
+                },
+            })
         })
     }
-
 }

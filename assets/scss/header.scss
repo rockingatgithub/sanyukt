@@ -1,31 +1,20 @@
-// header {
-//     #home-link {
-//         text-decoration: none;
-//         color: black;
-//     }
-//     display: flex;
-//     margin: 0;
-//     background: linear-gradient(to right, #3e5151, #decba4);
-//     #auth-title {
-//         font-family: 'Courier New', Courier, monospace;
-//         font-size: 1.5rem;
-//         font-weight: 600;
-//     }
-// #auth-links{
-//     display: inline-block;
-//     margin-left: 72%;
-//     list-style: none;
-//     li{
-//         display: inline-block;
-//         margin-left: 15px;
-//         a{
-//             text-decoration: none;
-//             font-size: 20px;
-//             color: whitesmoke;
-//             &:hover{
-//                 color: gainsboro;
-//             }
-//         }
-//     }
-// }
-// }
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*='col-'] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+#auth-links {
+    border-bottom: 0px;
+}
+
+.nav-link,
+#home-link {
+    color: black;
+    font-family: 'Red Rose', cursive;
+}

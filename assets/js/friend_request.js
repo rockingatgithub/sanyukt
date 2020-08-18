@@ -44,13 +44,13 @@ class FriendRequest {
     }
 
     newRequestDom(friend) {
-        return $(`<div id="friend-sentRequest-${friend._id}">
+        return $(`<li class="list-group-item list-item-flex"><div id="friend-sentRequest-${friend._id}">
                     <a href="/users/profile/${friend._id}" class="friend-names">
                     ${friend.name}
                     </a>
                     <a href="/users/friends/cancel/${friend._id}" class="cancel-request btn btn-primary btn-sm">Cancel</a>
                     <br/>
-                    </div>`)
+                    </div></li>`)
     }
 }
 
@@ -94,13 +94,13 @@ class AcceptRequest {
     }
 
     newRequestDom(friend) {
-        return $(`<div id="friend-box-${friend._id}">
+        return $(`<li class="list-group-item list-item-flex"><div id="friend-box-${friend._id}">
                     <a href="/users/profile/${friend._id}" class="friend-names">
                     ${friend.name}
                     </a>
                     <a href="/users/friends/remove/${friend._id}" class="remove-sent-request btn btn-primary btn-sm">Remove</a>
                 <br/>
-                </div>`)
+                </div></li>`)
     }
 }
 

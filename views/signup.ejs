@@ -1,125 +1,174 @@
-<h1>User</h1>
-<form action="/users/create/user" method="POST" id="signup-user-form">
-    <div class="form-group">
-        <label for="inputName">Name</label>
-        <input
-            type="text"
-            class="form-control"
-            name="name"
-            placeholder="your name"
-            id="inputName"
-            required
-        />
-    </div>
-    <div class="form-group">
-        <label for="inputEmail">Email address</label>
-        <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            id="inputEmail"
-            class="form-control"
-            required
-        />
-        <small id="emailHelp" class="form-text text-muted"
-            >We'll never share your email with anyone else.</small
+<div class="row justify-content-start no-gutters">
+    <div class="col-6"></div>
+    <div class="col-6">
+        <h1>User</h1>
+        <form action="/users/create/user" method="POST" id="signup-user-form">
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    placeholder="your name"
+                    id="inputName"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    id="inputEmail"
+                    class="form-control"
+                    required
+                />
+                <small id="emailHelp" class="form-text text-muted"
+                    >We'll never share your email with anyone else.</small
+                >
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    class="form-control"
+                    id="inputPassword"
+                    required
+                />
+            </div>
+            <div class="form-group form-check">
+                <input
+                    type="checkbox"
+                    onclick="showPassword()"
+                    id="showPassword"
+                    class="form-check-input"
+                />
+                <label for="showPassword" class="form-check-label"
+                    >Show Password</label
+                >
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                    type="password"
+                    name="confirm_password"
+                    placeholder="re-enter apssword"
+                    class="form-control"
+                    id="confirm-password"
+                    required
+                />
+            </div>
+            <input type="submit" value="submit" class="btn btn-primary" />
+        </form>
+
+        <p>
+            <strong>Google Sign Up:</strong>
+            <a href="/users/auth/google">
+                <img src="/images/google-icon.svg" height="30px" width="30px" />
+            </a>
+            <strong>Github Sign Up:</strong>
+            <a href="/users/auth/github">
+                <img src="/images/github-1.svg" height="30px" width="30px" />
+            </a>
+        </p>
+
+        <h1>Celebs</h1>
+        <form
+            action="/users/create/celebs"
+            method="POST"
+            id="signup-celebs-form"
         >
-    </div>
-    <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            class="form-control"
-            id="inputPassword"
-            required
-        />
-    </div>
-    <div class="form-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input
-            type="password"
-            name="confirm_password"
-            placeholder="re-enter apssword"
-            class="form-control"
-            id="confirm-password"
-            required
-        />
-    </div>
-    <input type="submit" value="submit" class="btn btn-primary" />
-</form>
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    placeholder="your name"
+                    id="inputName"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    id="inputEmail"
+                    class="form-control"
+                    required
+                />
+                <small id="emailHelp" class="form-text text-muted"
+                    >We'll never share your email with anyone else.</small
+                >
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    class="form-control"
+                    id="inputPassword"
+                    required
+                />
+            </div>
+            <div class="form-group form-check">
+                <input
+                    type="checkbox"
+                    onclick="showPassword()"
+                    id="showPassword"
+                    class="form-check-input"
+                />
+                <label for="showPassword" class="form-check-label"
+                    >Show Password</label
+                >
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                    type="password"
+                    name="confirm_password"
+                    placeholder="re-enter apssword"
+                    class="form-control"
+                    id="confirm-password"
+                    required
+                />
+            </div>
+            <input type="submit" value="submit" class="btn btn-primary" />
 
-<p>
-    <strong>Google Sign Up:</strong>
-    <a href="/users/auth/google">
-        <img src="/images/google-icon.svg" height="40px" width="40px" />
-    </a>
-    <strong>Github Sign Up:</strong>
-    <a href="/users/auth/github">
-        <img src="/images/github-1.svg" height="40px" width="40px" />
-    </a>
-</p>
-
-<h1>Celebs</h1>
-<form action="/users/create/celebs" method="POST" id="signup-celebs-form">
-    <div class="form-group">
-        <label for="inputName">Name</label>
-        <input
-            type="text"
-            class="form-control"
-            name="name"
-            placeholder="your name"
-            id="inputName"
-            required
-        />
+            <p>
+                <strong>Google Sign Up:</strong>
+                <a href="/users/auth/google">
+                    <img
+                        src="/images/google-icon.svg"
+                        height="30px"
+                        width="30px"
+                    />
+                </a>
+                <strong>Github Sign Up:</strong>
+                <a href="/users/auth/github">
+                    <img
+                        src="/images/github-1.svg"
+                        height="30px"
+                        width="30px"
+                    />
+                </a>
+            </p>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="inputEmail">Email address</label>
-        <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            id="inputEmail"
-            class="form-control"
-            required
-        />
-        <small id="emailHelp" class="form-text text-muted"
-            >We'll never share your email with anyone else.</small
-        >
-    </div>
-    <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            class="form-control"
-            id="inputPassword"
-            required
-        />
-    </div>
-    <div class="form-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input
-            type="password"
-            name="confirm_password"
-            placeholder="re-enter apssword"
-            class="form-control"
-            id="confirm-password"
-            required
-        />
-    </div>
-    <input type="submit" value="submit" class="btn btn-primary" />
-
-    <p>
-        <strong>Google Sign Up:</strong>
-        <a href="/users/auth/google">
-            <img src="/images/google-icon.svg" height="40px" width="40px" />
-        </a>
-        <strong>Github Sign Up:</strong>
-        <a href="/users/auth/github">
-            <img src="/images/github-1.svg" height="40px" width="40px" />
-        </a>
-    </p>
-</form>
+</div>
+<script>
+    function showPassword() {
+        let x = document.getElementById('inputPassword')
+        if (x.type === 'password') {
+            x.type = 'text'
+        } else {
+            x.type = 'password'
+        }
+    }
+</script>

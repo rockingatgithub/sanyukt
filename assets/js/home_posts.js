@@ -1,6 +1,100 @@
 //edit for adding comments using ajax.....
 {
     //method to submit post using ajax....
+    let showImageForm = function () {
+        let formToggle = $('#image-form-toggle')
+        formToggle.click(function (e) {
+            e.preventDefault()
+            let self = this
+            let formValue = parseInt($(self).attr('data-form'))
+            if (formValue === 0) {
+                let imageForm = function () {
+                    return $(`<form
+                action="/posts/create/image"
+                id="new-post-image"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                <input
+                    name="imageVideo"
+                    type="file"
+                    placeholder="Upload Image"
+                    class="form-control-file"
+                />
+                <label for="image-caption">Image:</label>
+                <input
+                    name="content"
+                    placeholder="Caption"
+                    value="Image indeed"
+                    id="image-caption"
+                    class="form-control"
+                    required
+                />
+                <input
+                    type="submit"
+                    value="Post"
+                    id="imagePostSubmit"
+                    class="btn btn-primary"
+                />
+            </form>`)
+                }
+                $(self).attr('data-form', '1')
+                $('#image-form-container').prepend(imageForm)
+                createImagePost()
+            } else {
+                $('#new-post-image').remove()
+                $(self).attr('data-form', '0')
+            }
+        })
+    }
+
+    let showVideoForm = function () {
+        let formToggle = $('#video-form-toggle')
+        formToggle.click(function (e) {
+            e.preventDefault()
+            let self = this
+            let formValue = parseInt($(self).attr('data-form'))
+            if (formValue === 0) {
+                let videoForm = function () {
+                    return $(`<form
+                action="/posts/create/video"
+                id="new-post-video"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                <input
+                    name="imageVideo"
+                    type="file"
+                    placeholder="Upload Video"
+                    class="form-control-file"
+                />
+                <label for="post-video">Video:</label>
+                <input
+                    name="content"
+                    placeholder="Caption"
+                    value="video"
+                    class="form-control"
+                    id="post-video"
+                    required
+                />
+                <input
+                    type="submit"
+                    value="Post"
+                    id="videoPostSubmit"
+                    class="btn btn-primary"
+                />
+            </form>`)
+                }
+                $(self).attr('data-form', '1')
+                $('#video-form-container').prepend(videoForm)
+                createVideoPost()
+            } else {
+                $('#new-post-video').remove()
+                $(self).attr('data-form', '0')
+            }
+        })
+    }
+
     let createPost = function () {
         let newPostForm = $('#new-post-form')
 
@@ -80,7 +174,6 @@
             })
             $('#imagePostSubmit').prop('disabled', false)
         })
-        
     }
 
     let createVideoPost = function () {
@@ -129,7 +222,7 @@
     //method to create a post in DOM...
     let newPostDom = function (post) {
         //show the count of zero likes on this post....
-        return $(`<li id="post-${post._id}">
+        return $(`<li id="post-${post._id}" class="list-group-item">
         <p>
             <small>
                 <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
@@ -180,7 +273,7 @@
     //post DOM for image post....
 
     let newImagePostDom = function (post) {
-        return $(`<li id="post-${post._id}">
+        return $(`<li id="post-${post._id}" class="list-group-item">
         <p>
             <small>
                 <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
@@ -232,7 +325,7 @@
     }
 
     let newVideoPostDom = function (post) {
-        return $(`<li id="post-${post._id}">
+        return $(`<li id="post-${post._id}" class="list-group-item">
         <p>
             <small>
                 <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
@@ -340,6 +433,8 @@
         })
     }
 
+    showImageForm()
+    showVideoForm()
     createPost()
     createImagePost()
     createVideoPost()

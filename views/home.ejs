@@ -1,152 +1,114 @@
+<%if(!locals.user){%>
 <link rel="stylesheet" href="/css/home.css" />
-<link rel="stylesheet" href="/css/chat_box.css" />
-
-<div id="home-container">
-    <section>
-        <%for(u of all_users){%> <%if(u.userType === 'celebs'){%>
-        <a href="/users/profile/<%= u.id%>" class="friend-names">
-            <%= u.name%>
-        </a>
-        <a
-            href="/users/friends/suggestions/<%= u.id%>"
-            class="btn btn-secondary"
-            >Follow</a
+<div id="home-wall-container">
+    <div id="app-intro">
+        <sapn id="app-heading">SANYUKT</sapn>
+        <span id="app-desc">Where friends meet, so does happiness.</span>
+        <span id="app-signin" class="btn btn-sm btn-outline-secondary"
+            ><a href="/users/signin" class="nav-link home-nav-link"
+                >Sign In</a
+            ></span
         >
-        <br />
-        <%}%> <%}%> <%if(locals.user){%> <%- include('_friend_list')%> <%}%>
-    </section>
-
-    <section id="feed-posts">
-        <%if(locals.user){%> <%#show form only user logged in%>
+        <span id="app-signup" class="btn btn-sm btn-outline-secondary"
+            ><a href="/users/signup" class="nav-link home-nav-link"
+                >Sign up</a
+            ></span
+        >
+    </div>
+</div>
+<%}else{%> <%#show form only user logged in%>
+<link rel="stylesheet" href="/css/chat_box.css" />
+<link rel="stylesheet" href="/css/home1.css" />
+<div class="row">
+    <div class="col-3"></div>
+    <div id="feed-posts" class="col-6">
         <h4>Posts</h4>
         <form action="/posts/create/text" id="new-post-form" method="POST">
             <div class="form-group">
                 <textarea
                     name="content"
-                    cols="30"
-                    rows="3"
+                    cols="20"
+                    rows="1"
                     class="form-control"
-                    placeholder="What's on your mind..."
+                    placeholder="What's on your mind, <%= locals.user.name%>?"
                     required
                 ></textarea>
             </div>
-            <input type="submit" value="Post" class="btn btn-primary" />
+            <div class="form-group">
+                <input type="submit" value="Post" class="btn btn-primary" />
+                <a id="image-form-toggle" data-form="0" class="margin-left-btn">
+                    <img
+                        src="/images/image-photography.svg"
+                        height="24px"
+                        width="24px"
+                    />
+                    Image
+                </a>
+                <a id="video-form-toggle" data-form="0" class="margin-left-btn">
+                    <img src="/images/camera.svg" height="24px" width="24px" />
+                    Video
+                </a>
+            </div>
         </form>
 
-        <form
-            action="/posts/create/image"
-            id="new-post-image"
-            method="POST"
-            enctype="multipart/form-data"
-        >
-            <input
-                name="imageVideo"
-                type="file"
-                placeholder="Upload Image"
-                class="form-control-file"
-            />
-            <label for="image-caption">Image:</label>
-            <input
-                name="content"
-                placeholder="Caption"
-                value="Image indeed"
-                id="image-caption"
-                class="form-control"
-                required
-            />
-            <input
-                type="submit"
-                value="Post"
-                id="imagePostSubmit"
-                class="btn btn-primary"
-            />
-        </form>
-
-        <form
-            action="/posts/create/video"
-            id="new-post-video"
-            method="POST"
-            enctype="multipart/form-data"
-        >
-            <input
-                name="imageVideo"
-                type="file"
-                placeholder="Upload Video"
-                class="form-control-file"
-            />
-            <label for="post-video">Video:</label>
-            <input
-                name="content"
-                placeholder="Caption"
-                value="video"
-                class="form-control"
-                id="post-video"
-                required
-            />
-            <input
-                type="submit"
-                value="Post"
-                id="videoPostSubmit"
-                class="btn btn-primary"
-            />
-        </form>
-        <%}%>
+        <div id="image-form-container"></div>
+        <div id="video-form-container"></div>
 
         <div id="posts-list-box">
-            <ul>
+            <ul class="list-group">
                 <%for(post of posts){%> <%- include('_posts') -%> <%}%>
             </ul>
         </div>
-    </section>
+
+        <section>
+            <%- include('_chat_box') -%>
+        </section>
+        <script src="/js/home_post_comments.js"></script>
+        <script src="/js/home_posts.js"></script>
+        <!-- import the script file for toggle likes, also run it over already present posts and comments  -->
+
+        <script src="/js/toggle_likes.js"></script>
+        <script>
+            $('.toggle-like-button').each(function () {
+                let self = this
+                let toggleLike = new ToggleLike(self)
+            })
+        </script>
+
+        <script src="/js/friend_request.js"></script>
+        <script>
+            $('.friends-request').each(function () {
+                let self = this
+                let friendRequest = new FriendRequest(self)
+            })
+            $('.accept-request').each(function () {
+                let self = this
+                let friendRequest = new AcceptRequest(self)
+            })
+            $('.reject-request').each(function () {
+                let self = this
+                let friendRequest = new RejectRequest(self)
+            })
+            $('.cancel-request').each(function () {
+                let self = this
+                let friendRequest = new CancelRequest(self)
+            })
+            $('.remove-sent-request').each(function () {
+                let self = this
+                let friendRequest = new RemoveSentRequest(self)
+            })
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        <script src="/js/chat_engine.js"></script>
+        <script src="/js/chat_store.js"></script>
+        <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+        <script>
+            new ChatEngine('user-chat-box', '<%= locals.user.email%>')
+        </script>
+    </div>
+    <div class="col-3">
+        <%- include('_friend_list')%>
+    </div>
 </div>
-
-<section>
-    <%- include('_chat_box') -%>
-</section>
-
-<script src="/js/home_post_comments.js"></script>
-<script src="/js/home_posts.js"></script>
-
-<!-- import the script file for toggle likes, also run it over already present posts and comments  -->
-
-<script src="/js/toggle_likes.js"></script>
-<script>
-    $('.toggle-like-button').each(function () {
-        let self = this
-        let toggleLike = new ToggleLike(self)
-    })
-</script>
-
-<script src="/js/friend_request.js"></script>
-<script>
-    $('.friends-request').each(function () {
-        let self = this
-        let friendRequest = new FriendRequest(self)
-    })
-    $('.accept-request').each(function () {
-        let self = this
-        let friendRequest = new AcceptRequest(self)
-    })
-    $('.reject-request').each(function () {
-        let self = this
-        let friendRequest = new RejectRequest(self)
-    })
-    $('.cancel-request').each(function () {
-        let self = this
-        let friendRequest = new CancelRequest(self)
-    })
-    $('.remove-sent-request').each(function () {
-        let self = this
-        let friendRequest = new RemoveSentRequest(self)
-    })
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-<script src="/js/chat_engine.js"></script>
-<script src="/js/chat_store.js"></script>
-<script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
-<%if(locals.user){%>
-<script>
-    new ChatEngine('user-chat-box', '<%= locals.user.email%>')
-</script>
 <%}%>

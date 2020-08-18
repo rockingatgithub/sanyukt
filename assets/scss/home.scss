@@ -1,6 +1,48 @@
-#home-container{
-    display: inline-block;
-    #feed-posts {
-        margin-top: -18%;
+body {
+    // margin: 0;
+    background: url('https://img.techpowerup.org/200817/timon-studler-bik2anmmnz4-unsplash649.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // filter: blur(8px);
+    // -webkit-filter: blur(8px);
+    background-position: center;
+    text-decoration: none;
+
+    #home-wall-container {
+        display: inline-block;
+        #feed-posts {
+            margin-top: -18%;
+        }
+
+        #app-intro {
+            display: flex;
+            flex-direction: column;
+            // border: 1px solid white;
+            position: absolute;
+            left: 28%;
+            top: 26%;
+            align-items: center;
+            justify-content: center;
+            right: 28%;
+        }
+        #app-heading {
+            font-family: 'Red Rose', cursive;
+            font-size: 2.8em;
+            color: whitesmoke;
+        }
+        #app-desc {
+            font-family: 'Red Rose', cursive;
+            font-size: 1.8em;
+            color: whitesmoke;
+        }
+        .home-nav-link {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: whitesmoke;
+        }
+        #app-signup {
+            margin-top: 3%;
+        }
     }
 }

@@ -1,51 +1,74 @@
 <link rel="stylesheet" href="/css/user_profile.css" />
-<img src="<%= user.avatar%>" alt="<%=user.name%>" width="100" />
-
-<%if (user.id === profile_user.id){%>
-<!-- show form only when user matches -->
-<form
-    action="/users/update/<%= profile_user.id%>"
-    enctype="multipart/form-data"
-    method="POST"
->
-    <div class="form-group">
-        <label for="user-name">Name:</label>
-        <input
-            type="text"
-            name="name"
-            value="<%= profile_user.name%>"
-            placeholder="Your Name"
-            class="form-control"
-            id="user-name"
-            required
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <%if (user.id === profile_user.id){%>
+        <!-- show form only when user matches -->
+        <form
+            action="/users/update/<%= profile_user.id%>"
+            enctype="multipart/form-data"
+            method="POST"
+        >
+            <div class="form-group avatar-group">
+                <div id="avatar-chooser">
+                    <img
+                        src="<%= user.avatar%>"
+                        alt="<%=user.name%>"
+                        id="user-profile-avatar"
+                    />
+                    <label for="user-avatar" id="avatar-chooser-icon">
+                        <img
+                            src="/images/icons8-camera-26.png"
+                            height="26px"
+                            width="26px"
+                        />
+                    </label>
+                </div>
+                <input
+                    type="file"
+                    name="avatar"
+                    class="form-control-file"
+                    id="user-avatar"
+                    placeholder="Profile Picture"
+                    style="display: none;"
+                />
+            </div>
+            <div class="form-group">
+                <label for="user-name">Name:</label>
+                <input
+                    type="text"
+                    name="name"
+                    value="<%= profile_user.name%>"
+                    placeholder="Your Name"
+                    class="form-control"
+                    id="user-name"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="user-email">Email:</label>
+                <input
+                    type="email"
+                    name="email"
+                    value="<%= profile_user.email%>"
+                    placeholder="Your Email"
+                    class="form-control"
+                    id="user-email"
+                    required
+                    readonly
+                />
+            </div>
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </form>
+        <%}else{%>
+        <img
+            src="<%= user.avatar%>"
+            alt="<%=user.name%>"
+            id="user-profile-avatar"
         />
+        <p><%= profile_user.name%></p>
+        <p><%= profile_user.email%></p>
+        <%}%>
     </div>
-    <div class="form-group">
-        <label for="user-email">Email:</label>
-        <input
-            type="email"
-            name="email"
-            value="<%= profile_user.email%>"
-            placeholder="Your Email"
-            class="form-control"
-            id="user-email"
-            required
-            readonly
-        />
-    </div>
-    <div class="form-group">
-        <label for="user-avatar">Profile Pic:</label>
-        <input
-            type="file"
-            name="avatar"
-            class="form-control-file"
-            id="user-avatar"
-            placeholder="Profile Picture"
-        />
-    </div>
-    <input type="submit" value="Update" class="btn btn-primary" />
-</form>
-<%}else{%>
-<p><%= profile_user.name%></p>
-<p><%= profile_user.email%></p>
-<%}%>
+    <div class="col-3"></div>
+</div>

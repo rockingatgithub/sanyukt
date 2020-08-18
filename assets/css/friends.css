@@ -1,7 +1,22 @@
-#friend-container {
-  position: relative;
-  left: 168%;
-  display: inline-block; }
-  #friend-container .friend-names {
-    text-decoration: none;
-    color: whitesmoke; }
+.friend-names {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  text-transform: lowercase; }
+
+h5 {
+  font-family: 'Red Rose', cursive; }
+
+.list-item-flex {
+  display: flex; }
+
+.list-item-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.list-item-flex-div {
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
