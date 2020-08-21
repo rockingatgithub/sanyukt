@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="/css/user_profile.css" />
 <div class="row">
-    <div class="col-3"></div>
-    <div class="col-6">
-        <%if (user.id === profile_user.id){%>
+    <div class="col-xl-3 col-lg-3 col-md-2 col-sm-2 col-0"></div>
+    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-8 col-12">
+        <%if(profile_user.userType === 'user'){%> <%if (user.id ===
+        profile_user.id){%>
         <!-- show form only when user matches -->
         <form
             action="/users/update/<%= profile_user.id%>"
@@ -62,13 +63,175 @@
         </form>
         <%}else{%>
         <img
-            src="<%= user.avatar%>"
-            alt="<%=user.name%>"
+            src="<%= profile_user.avatar%>"
+            alt="<%= profile_user.name%>"
             id="user-profile-avatar"
         />
         <p><%= profile_user.name%></p>
         <p><%= profile_user.email%></p>
-        <%}%>
+        <%}%> <%}else{%> <%if (user.id === profile_user.id){%>
+        <form
+            action="/users/update/<%= profile_user.id%>"
+            enctype="multipart/form-data"
+            method="POST"
+        >
+            <div class="form-group avatar-group">
+                <div id="avatar-chooser">
+                    <img
+                        src="<%= user.avatar%>"
+                        alt="<%=user.name%>"
+                        id="user-profile-avatar"
+                    />
+                    <label for="user-avatar" id="avatar-chooser-icon">
+                        <img
+                            src="/images/icons8-camera-26.png"
+                            height="26px"
+                            width="26px"
+                        />
+                    </label>
+                </div>
+                <input
+                    type="file"
+                    name="avatar"
+                    class="form-control-file"
+                    id="user-avatar"
+                    placeholder="Profile Picture"
+                    style="display: none;"
+                />
+            </div>
+            <div class="form-group">
+                <label for="user-name">Name:</label>
+                <input
+                    type="text"
+                    name="name"
+                    value="<%= profile_user.name%>"
+                    placeholder="Your Name"
+                    class="form-control"
+                    id="user-name"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="user-email">Email:</label>
+                <input
+                    type="email"
+                    name="email"
+                    value="<%= profile_user.email%>"
+                    placeholder="Your Email"
+                    class="form-control"
+                    id="user-email"
+                    required
+                    readonly
+                />
+            </div>
+            <div class="form-group">
+                <label for="user-desc">Description:</label>
+                <textarea
+                    type="text"
+                    name="description"
+                    cols="30"
+                    rows="2"
+                    placeholder="Your Description"
+                    class="form-control"
+                    id="user-desc"
+                >
+                <%= celeb_user.description %>
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="user-location">Location:</label>
+                <input
+                    type="text"
+                    name="location"
+                    value="<%= celeb_user.location %>"
+                    placeholder="Your Location"
+                    class="form-control"
+                    id="user-location"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="user-profession">Profession:</label>
+                <input
+                    type="text"
+                    name="profession"
+                    value="<%= celeb_user.profession %>"
+                    placeholder="Your Profession"
+                    class="form-control"
+                    id="user-profession"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="user-age">Age:</label>
+                <input
+                    type="number"
+                    name="age"
+                    value="<%= celeb_user.age%>"
+                    placeholder="Your Age"
+                    class="form-control"
+                    id="user-age"
+                    required
+                />
+            </div>
+            <div class="form-check form-check-inline">
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="inlineRadio1"
+                    value="Male"
+                    checked
+                />
+                <label class="form-check-label" for="inlineRadio1">Male</label>
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="inlineRadio2"
+                    value="Female"
+                />
+                <label class="form-check-label" for="inlineRadio2"
+                    >Female</label
+                >
+            </div>
+            <input type="submit" value="Update" class="btn btn-primary" />
+        </form>
+        <%}else{%>
+        <img
+            src="<%= profile_user.avatar%>"
+            alt="<%= profile_user.name%>"
+            id="user-profile-avatar"
+        />
+        <p>
+            <img src="/images/name.svg" height="24px" width="24px" /> <%=
+            profile_user.name%>
+        </p>
+        <p>
+            <img src="/images/mail.svg" height="24px" width="24px" /> <%=
+            profile_user.email%>
+        </p>
+        <p>
+            <img src="/images/job.svg" height="24px" width="24px" /> <%=
+            celeb_user.profession%>
+        </p>
+        <p>
+            <img src="/images/age.svg" height="24px" width="24px" /> <%=
+            celeb_user.age%>
+        </p>
+        <p>
+            <img src="/images/gender.svg" height="24px" width="24px" /> <%=
+            celeb_user.gender%>
+        </p>
+        <p>
+            <img src="/images/description.svg" height="24px" width="24px" /> <%=
+            celeb_user.description%>
+        </p>
+        <p>
+            <img src="/images/location.svg" height="24px" width="24px" /> <%=
+            celeb_user.location%>
+        </p>
+        <%}%> <%}%>
     </div>
-    <div class="col-3"></div>
+    <div class="col-xl-3 col-lg-3 col-md-2 col-sm-2 col-12"></div>
 </div>

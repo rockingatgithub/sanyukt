@@ -22,11 +22,13 @@ module.exports.home = async function (req, res) {
 
         let chats = await Chat.find({}).populate('user')
 
-        let users = await User.find({})
+        let users = await User.find({ userType: 'user' })
+        console.log(users)
         let to_friends = []
         let from_friends = []
         let sent_friends = []
         let received_friends = []
+        let celebs = []
         if (req.user) {
             to_friends = await Friendship.find({
                 from_user: req.user._id,
@@ -48,7 +50,8 @@ module.exports.home = async function (req, res) {
                 pending: false,
             }).populate('to_user')
 
-            
+            celebs = await User.find({ userType: 'celebs' })
+            // console.log(celebs)
         }
         return res.render('home', {
             title: 'Sanyukt | Home',
@@ -58,6 +61,7 @@ module.exports.home = async function (req, res) {
             received_friends: received_friends,
             sent_request: to_friends,
             rec_request: from_friends,
+            celebs_user: celebs,
             chats: chats,
         })
     } catch (err) {

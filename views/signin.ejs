@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/css/signin.css" />
 <div class="row">
-    <div class="col-6"></div>
-    <div class="col-6">
+    <div class="col-xl-6 col-lg-6 col-md-5"></div>
+    <div class="col-xl-6 col-lg-6 col-md-7">
         <form action="/users/create-session" method="POST" id="signin-form">
             <div class="form-group form-elements">
                 <label for="user-id">Email</label>
@@ -41,14 +41,15 @@
             </button>
         </form>
 
-        <p>
+        <p class="social-auth-links">
             <strong>Google Sign Up:</strong>
             <a href="/users/auth/google">
-                <img src="/images/google-icon.svg" height="30px" width="30px" />
+                <img src="/images/google-icon.svg" height="24px" width="24px" />
             </a>
+            <br />
             <strong>Github Sign Up:</strong>
             <a href="/users/auth/github">
-                <img src="/images/github-1.svg" height="30px" width="30px" />
+                <img src="/images/github-1.svg" height="24px" width="24px" />
             </a>
         </p>
     </div>

@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="/css/signin.css" />
 <div class="row justify-content-start no-gutters">
-    <div class="col-6"></div>
-    <div class="col-6">
+    <div class="col-xl-6 col-lg-6 col-md-5"></div>
+    <div class="col-xl-6 col-lg-6 col-md-7">
         <h1>User</h1>
         <form action="/users/create/user" method="POST" id="signup-user-form">
             <div class="form-group">
@@ -64,14 +65,15 @@
             <input type="submit" value="submit" class="btn btn-primary" />
         </form>
 
-        <p>
+        <p class="social-auth-links">
             <strong>Google Sign Up:</strong>
             <a href="/users/auth/google">
-                <img src="/images/google-icon.svg" height="30px" width="30px" />
+                <img src="/images/google-icon.svg" height="24px" width="24px" />
             </a>
+            <br />
             <strong>Github Sign Up:</strong>
             <a href="/users/auth/github">
-                <img src="/images/github-1.svg" height="30px" width="30px" />
+                <img src="/images/github-1.svg" height="24px" width="24px" />
             </a>
         </p>
 
@@ -133,29 +135,99 @@
                 <input
                     type="password"
                     name="confirm_password"
-                    placeholder="re-enter apssword"
+                    placeholder="re-enter password"
                     class="form-control"
                     id="confirm-password"
                     required
                 />
             </div>
+            <div class="form-group">
+                <label for="inputDesc">Description</label>
+                <textarea
+                    type="text"
+                    cols="30"
+                    rows="2"
+                    class="form-control"
+                    name="description"
+                    placeholder="describe yourself"
+                    id="inputDesc"
+                    required
+                >
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="inputLocation">Location</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="location"
+                    placeholder="your location"
+                    id="inputLocation"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="inputProfession">Profession</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="profession"
+                    placeholder="your profession"
+                    id="inputProfession"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="inputAge">Age</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    name="age"
+                    placeholder="your age"
+                    id="inputAge"
+                    required
+                />
+            </div>
+            <div class="form-check form-check-inline">
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="inlineRadio1"
+                    value="Male"
+                />
+                <label class="form-check-label" for="inlineRadio1">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="inlineRadio2"
+                    value="Female"
+                />
+                <label class="form-check-label" for="inlineRadio2"
+                    >Female</label
+                >
+            </div>
             <input type="submit" value="submit" class="btn btn-primary" />
 
-            <p>
+            <p class="social-auth-links">
                 <strong>Google Sign Up:</strong>
                 <a href="/users/auth/google">
                     <img
                         src="/images/google-icon.svg"
-                        height="30px"
-                        width="30px"
+                        height="24px"
+                        width="24px"
                     />
                 </a>
+                <br />
                 <strong>Github Sign Up:</strong>
                 <a href="/users/auth/github">
                     <img
                         src="/images/github-1.svg"
-                        height="30px"
-                        width="30px"
+                        height="24px"
+                        width="24px"
                     />
                 </a>
             </p>

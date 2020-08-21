@@ -46,6 +46,7 @@ class FriendRequest {
     newRequestDom(friend) {
         return $(`<li class="list-group-item list-item-flex"><div id="friend-sentRequest-${friend._id}">
                     <a href="/users/profile/${friend._id}" class="friend-names">
+                    <img src="${friend.avatar}" class="friend-list-avatar" />
                     ${friend.name}
                     </a>
                     <a href="/users/friends/cancel/${friend._id}" class="cancel-request btn btn-primary btn-sm">Cancel</a>
@@ -96,6 +97,7 @@ class AcceptRequest {
     newRequestDom(friend) {
         return $(`<li class="list-group-item list-item-flex"><div id="friend-box-${friend._id}">
                     <a href="/users/profile/${friend._id}" class="friend-names">
+                    <img src="${friend.avatar}" class="friend-list-avatar" />
                     ${friend.name}
                     </a>
                     <a href="/users/friends/remove/${friend._id}" class="remove-sent-request btn btn-primary btn-sm">Remove</a>

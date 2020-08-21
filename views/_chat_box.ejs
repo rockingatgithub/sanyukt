@@ -1,16 +1,39 @@
 <!-- CHANGE :: Creat the code for chat box -->
 <% if (locals.user){ %>
-<div id="user-chat-box">
-    <ul id="chat-messages-list">
+<link rel="stylesheet" href="/css/chat_box.css" />
+
+<a id="chat-box-toggle" class="animate__animated animate__pulse">
+    <img src="/images/chat-box.svg" height="40px" width="40px" />
+</a>
+<div id="user-chat-box" style="display: none;">
+    <h5 id="user-chat-box-header">
+        <!-- <%= locals.user.name%> -->
+        Chat
+        <a id="chat-close"
+            ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M11.1049 10L19.7712 1.33372C20.0763 1.0286 20.0763 0.533916 19.7712 0.228838C19.466 -0.0762402 18.9714 -0.0762793 18.6663 0.228838L9.99998 8.89516L1.33372 0.228838C1.0286 -0.0762793 0.533914 -0.0762793 0.228837 0.228838C-0.07624 0.533955 -0.0762791 1.02864 0.228837 1.33372L8.8951 10L0.228837 18.6663C-0.0762791 18.9714 -0.0762791 19.4661 0.228837 19.7712C0.381376 19.9238 0.581336 20 0.781296 20C0.981257 20 1.18118 19.9238 1.33376 19.7712L9.99998 11.1049L18.6662 19.7712C18.8188 19.9238 19.0187 20 19.2187 20C19.4187 20 19.6186 19.9238 19.7712 19.7712C20.0763 19.4661 20.0763 18.9714 19.7712 18.6663L11.1049 10Z"
+                    fill="#747272"
+                />
+            </svg>
+        </a>
+    </h5>
+    <ul id="chat-messages-list" class="list-group">
         <%for(chat of chats){%> <%if(chat.user.id !== locals.user.id){%>
-        <li class="other-message">
+        <li class="other-message" class="list-group-item">
             <span>
                 <%= chat.content%>
                 <sub><%= chat.user.name%></sub>
             </span>
         </li>
         <%}else{%>
-        <li class="self-message">
+        <li class="self-message" class="list-group-item">
             <span>
                 <%= chat.content%>
                 <sub><%= chat.user.name%></sub>
@@ -20,16 +43,92 @@
     </ul>
     <div id="chat-message-input-container">
         <form id="chat-form">
-            <div class="form-group">
-                <input
-                    name="chat_content"
-                    id="chat-message-input"
-                    placeholder="Type message here"
-                    class="form-control"
-                />
+            <div class="form-row">
+                <div class="col-10">
+                    <input
+                        name="chat_content"
+                        id="chat-message-input"
+                        placeholder="Type message here"
+                        class="form-control"
+                    />
+                </div>
+                <div class="col-2">
+                    <button id="send-message" class="form-control">
+                        <svg
+                            width="24"
+                            height="21"
+                            viewBox="0 0 24 21"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M0 20.8214L24 10.5357L0 0.25V8.25L17.1429 10.5357L0 12.8214V20.8214Z"
+                                fill="#747272"
+                            />
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <button id="send-message" class="btn btn-primary">Send</button>
         </form>
     </div>
 </div>
+<script src="/js/chat_toggle.js"></script>
+<script src="/js/chat_engine.js"></script>
+<script src="/js/chat_store.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
+<script>
+    // Make the DIV element draggable:
+    dragElement(document.getElementById('user-chat-box'))
+
+    function dragElement(elmnt) {
+        var pos1 = 0,
+            pos2 = 0,
+            pos3 = 0,
+            pos4 = 0
+        if (document.getElementById(elmnt.id + '-header')) {
+            // if present, the header is where you move the DIV from:
+            document.getElementById(
+                elmnt.id + '-header'
+            ).onmousedown = dragMouseDown
+        } else {
+            // otherwise, move the DIV from anywhere inside the DIV:
+            elmnt.onmousedown = dragMouseDown
+        }
+
+        function dragMouseDown(e) {
+            e = e || window.event
+            e.preventDefault()
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX
+            pos4 = e.clientY
+            document.onmouseup = closeDragElement
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag
+        }
+
+        function elementDrag(e) {
+            e = e || window.event
+            e.preventDefault()
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX
+            pos2 = pos4 - e.clientY
+            pos3 = e.clientX
+            pos4 = e.clientY
+            // set the element's new position:
+            elmnt.style.top = elmnt.offsetTop - pos2 + 'px'
+            elmnt.style.left = elmnt.offsetLeft - pos1 + 'px'
+        }
+
+        function closeDragElement() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null
+            document.onmousemove = null
+        }
+    }
+</script>
+
+<script>
+    new ChatEngine('user-chat-box', '<%= locals.user.email%>')
+</script>
 <% } %>

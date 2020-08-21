@@ -2,20 +2,30 @@
 #user-chat-box {
     position: fixed;
     bottom: 35px;
-    right: 10px;
-    border: 1px dashed grey;
-    height: 350px;
+    // right: 10px;
+    border: 2px solid rgb(207, 204, 204);
+    height: 400px;
     width: 300px;
     background: white;
     padding: 5px;
     box-shadow: 1px 1px 1px 1px lightgrey;
-    display: none;
+    z-index: 1000;
+    border-radius: 16px;
+    // display: none;
+
+    #chat-header {
+        padding: 10px;
+        cursor: move;
+        z-index: 1010;
+        // background-color: #2196f3;
+        color: rgb(93, 231, 197);
+    }
 
     #chat-messages-list {
         list-style: none;
-        padding: 10px;
-        height: 70%;
-        background-color: white;
+        // padding: 10px;
+        height: 80%;
+        // background-color: white;
         overflow: auto;
 
         .other-message {
@@ -24,7 +34,9 @@
             span {
                 display: inline-block;
                 padding: 15px;
-                background-color: #ffa0a0;
+                background-color: #2f3133bf;
+                border-radius: 25px;
+                color: whitesmoke;
             }
         }
 
@@ -35,28 +47,28 @@
             span {
                 display: inline-block;
                 padding: 15px;
-                background-color: #a0dcff;
+                background-color: #767f88bf;
+                border-radius: 25px;
+                color: whitesmoke;
             }
         }
     }
     #chat-message-input-container {
-        height: 24%;
+        height: auto;
         width: 100%;
         display: flex;
         flex-direction: row;
-
-        #chat-message-input {
-            height: 50%;
-            width: 70%;
-        }
-
-        #send-message {
-            height: 50%;
-            width: 30%;
-            font-size: 25px;
-            color: white;
-            border: none;
-            background: #58d258;
-        }
     }
+    #chat-close {
+        margin-left: 216px;
+        margin-top: -4px;
+        position: absolute;
+    }
+}
+
+#chat-box-toggle {
+    position: fixed;
+    bottom: 35px;
+    z-index: 1020;
+    opacity: 0.7;
 }

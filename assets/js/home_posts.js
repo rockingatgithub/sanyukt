@@ -19,7 +19,9 @@
                     name="imageVideo"
                     type="file"
                     placeholder="Upload Image"
+                    id="post-image-file"
                     class="form-control-file"
+                    required="true"
                 />
                 <label for="image-caption">Image:</label>
                 <input
@@ -28,7 +30,7 @@
                     value="Image indeed"
                     id="image-caption"
                     class="form-control"
-                    required
+                    required="true"
                 />
                 <input
                     type="submit"
@@ -66,7 +68,9 @@
                     name="imageVideo"
                     type="file"
                     placeholder="Upload Video"
+                    id="post-video-file"
                     class="form-control-file"
+                    required="true"
                 />
                 <label for="post-video">Video:</label>
                 <input
@@ -75,7 +79,7 @@
                     value="video"
                     class="form-control"
                     id="post-video"
-                    required
+                    required="true"
                 />
                 <input
                     type="submit"
@@ -138,6 +142,11 @@
             event.preventDefault()
             let newPostForm = $('#new-post-image')[0]
             let newPostData = new FormData(newPostForm)
+            let imagefile = $('#post-image-file').val()
+            if (imagefile === '') {
+                alert('empty input file')
+                return false
+            }
             $('#imagePostSubmit').prop('disabled', true)
 
             $.ajax({
@@ -181,6 +190,11 @@
             event.preventDefault()
             let newPostForm = $('#new-post-video')[0]
             let newPostData = new FormData(newPostForm)
+            let videofile = $('#post-video-file').val()
+            if (videofile === '') {
+                alert('empty input file')
+                return false
+            }
             $('#videoPostSubmit').prop('disabled', true)
             console.log('I ran')
             $.ajax({
@@ -223,50 +237,72 @@
     let newPostDom = function (post) {
         //show the count of zero likes on this post....
         return $(`<li id="post-${post._id}" class="list-group-item">
-        <p>
-            <small>
-                <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
-            </small>
-            ${post.content}
-            <br>
-            <small>
+        <div class="card" style="width: auto;">
+            <div class="card-header">
+                <small>
+                    <a
+                        class="delete-post-button"
+                        href="/posts/destroy/${post._id}"
+                        ><img src="/images/trash.svg" height="20px" width="20px"
+                    /></a>
+                </small>
                 ${post.user.name}
-            </small>
-            <br>
-            <small class="likebox">
-            <div class="likeOptions">
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
-                <span class="emojis-post">👍</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
-                <span class="emojis-post">❤️</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
-                <span class="emojis-post">😆</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
-                <span class="emojis-post">😡</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
-                <span class="emojis-post">☹️</span>
-            </a>
-        </div>
-            </small>
-        </p>
-        <div id="post-comments">
-                <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
-                <div class="form-group">
-                    <input type="text" name="content" placeholder="add your comments here.." class="form-control" required/>
-                </div>
-                    <input type="hidden" name="post" value="${post._id}" />
-                    <input type="submit" value="Add Comment" class="btn btn-primary" />
-                </form>
-            <div class="post-comments-list">
-                <ul id="post-comments-${post._id}">
-                    
-                </ul>
             </div>
-        </div>
+            <div class="card-body">
+                ${post.content}
+            </div>
+            <div class="card-footer">
+                <small class="likebox">
+                <div class="likeOptions">
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
+                    <span class="emojis-post">👍</span>
+                    </a>
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
+                        <span class="emojis-post">❤️</span>
+                    </a>
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
+                        <span class="emojis-post">😆</span>
+                    </a>
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
+                        <span class="emojis-post">😡</span>
+                    </a>
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
+                        <span class="emojis-post">☹️</span>
+                    </a>
+                </div>
+
+                </small>
+                <div id="post-comments">
+                    
+                    <form
+                        action="/comments/create"
+                        method="POST"
+                        id="post-${post._id}-comments-form"
+                    >
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                name="content"
+                                placeholder="add your comments here.."
+                                class="form-control"
+                                required
+                            />
+                        </div>
+                        <input type="hidden" name="post" value="${post._id}" />
+                        <input
+                            type="submit"
+                            value="Add Comment"
+                            class="btn btn-primary"
+                        />
+                    </form>
+                    <div class="post-comments-list">
+                        <ul id="post-comments-${post._id}" class="list-group">
+                
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
 </li>`)
     }
 
@@ -274,39 +310,37 @@
 
     let newImagePostDom = function (post) {
         return $(`<li id="post-${post._id}" class="list-group-item">
-        <p>
+        <div class="post-image-box card" style="width: auto;">
+        <div class="card-header">
             <small>
-                <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
+                <a class="delete-post-button" href="/posts/destroy/${post._id}"><img src="/images/trash.svg" height="20px" width="20px" /></a>
             </small>
-            <div>
-                    <img src="${post.imageVideo}" height="100" width="100">
-                </div>
-            ${post.content}
-            <br>
-            <small>
-                ${post.user.name}
-            </small>
-            <br>
-            <small class="likebox">
-            <div class="likeOptions">
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
-                <span class="emojis-post">👍</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
-                <span class="emojis-post">❤️</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
-                <span class="emojis-post">😆</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
-                <span class="emojis-post">😡</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
-                <span class="emojis-post">☹️</span>
-            </a>
+            ${post.user.name}
         </div>
-            </small>
-        </p>
+            <img src="${post.imageVideo}" height="400" width="auto" class="post-image-src card-img-top" />
+            <div class="card-body">
+                ${post.content}
+            </div>
+            <div class="card-footer">
+                <small class="likebox">
+                    <div class="likeOptions">
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
+                        <span class="emojis-post">👍</span>
+                    </a>
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
+                        <span class="emojis-post">❤️</span>
+                    </a>
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
+                        <span class="emojis-post">😆</span>
+                    </a>
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
+                        <span class="emojis-post">😡</span>
+                    </a>
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
+                        <span class="emojis-post">☹️</span>
+                    </a>
+                    </div>  
+                </small>
         <div id="post-comments">
                 <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
                     <div class="form-group">
@@ -321,75 +355,61 @@
                 </ul>
             </div>
         </div>
+       </div> 
+    </div>    
     </li>`)
     }
 
     let newVideoPostDom = function (post) {
         return $(`<li id="post-${post._id}" class="list-group-item">
-        <p>
-            <small>
-                <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
-            </small>
-            <div>
-                    <video
-                        id="my-video"
-                        class="video-js"
-                        controls
-                        preload="auto"
-                        width="640"
-                        height="264"
-                        poster=""
-                        data-setup="{}"
-                    >
-                        <source src="${post.imageVideo}" type="video/mp4" />
-                        <!-- <source src="MY_VIDEO.webm" type="video/webm" /> -->
-                        <p class="vjs-no-js">
-                        To view this video please enable JavaScript, and consider upgrading to a
-                        web browser that
-                        <a href="https://videojs.com/html5-video-support/" target="_blank"
-                            >supports HTML5 video</a
-                        >
-                        </p>
-                    </video>
-                </div>
-            ${post.content}
-            <br>
-            <small>
+        <div class="post-video-box card" style="width: auto;">
+            <div class="card-header">
+                <small>
+                    <a class="delete-post-button" href="/posts/destroy/${post._id}"><img src="/images/trash.svg" height="20px" width="20px" /></a>
+                </small>
                 ${post.user.name}
-            </small>
-            <br>
-            <small class="likebox">
-            <div class="likeOptions">
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
-                <span class="emojis-post">👍</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
-                <span class="emojis-post">❤️</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
-                <span class="emojis-post">😆</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
-                <span class="emojis-post">😡</span>
-            </a>
-            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
-                <span class="emojis-post">☹️</span>
-            </a>
-        </div>
-            </small>
-        </p>
-        <div id="post-comments">
-                <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
-                <div class="form-group">    
-                <input type="text" name="content" placeholder="add your comments here.." class="form-control" required/>
-                </div>    
-                <input type="hidden" name="post" value="${post._id}" />
-                    <input type="submit" value="Add Comment" class="btn btn-primary" />
-                </form>
-            <div class="post-comments-list">
-                <ul id="post-comments-${post._id}">
-                    
-                </ul>
+            </div>
+                <video class="post-video-src card-top-img" controls preload="auto" width="auto" height="400">
+                    <source src="${post.imageVideo}" type="video/mp4" />
+                    <!-- <source src="MY_VIDEO.webm" type="video/webm" /> -->
+                </video>
+            <div class="card-body">
+                ${post.content}
+            </div>
+            <div class="card-footer">
+                <small class="likebox">
+                    <div class="likeOptions">
+                        <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=like">
+                            <span class="emojis-post">👍</span>
+                        </a>
+                        <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=love">
+                            <span class="emojis-post">❤️</span>
+                        </a>
+                        <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=haha">
+                            <span class="emojis-post">😆</span>
+                        </a>
+                        <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=anger">
+                            <span class="emojis-post">😡</span>
+                        </a>
+                        <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post&reaction=sad">
+                            <span class="emojis-post">☹️</span>
+                        </a>
+                    </div>
+                </small>
+                <div id="post-comments">
+                    <form action="/comments/create" method="POST" id="post-${post._id}-comments-form">
+                        <div class="form-group">    
+                            <input type="text" name="content" placeholder="add your comments here.." class="form-control" required/>
+                        </div>    
+                            <input type="hidden" name="post" value="${post._id}" />
+                            <input type="submit" value="Add Comment" class="btn btn-primary" />
+                    </form>
+                    <div class="post-comments-list">
+                        <ul id="post-comments-${post._id}">
+            
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </li>`)

@@ -60,7 +60,7 @@ class PostComments {
         return $(`<li id="comment-${comment._id}" class="list-group-item">
                         <p>
                             <small>
-                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
+                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}"><img src="/images/trash.svg" height="15px" width="15px" /></a>
                             </small>
                             
                             ${comment.content}

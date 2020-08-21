@@ -1,90 +1,332 @@
 <li id="post-<%= post._id%>" class="list-group-item">
-        <p>
+    <%if(post.postType === 'image'){%>
+    <div class="post-image-box card" style="width: auto;">
+        <div class="card-header">
             <%if(locals.user && locals.user.id === post.user.id){%>
             <small>
-                <a class="delete-post-button" href="/posts/destroy/<%= post.id%>">X</a>
+                <a
+                    class="delete-post-button"
+                    href="/posts/destroy/<%= post.id%>"
+                    ><img src="/images/trash.svg" height="20px" width="20px"
+                /></a>
             </small>
-            <%}%>
-            <%if(post.postType === 'image'){%>
-                <div>
-                    <img src="<%= post.imageVideo%>" height="100" width="100">
-                </div>
-            <%}%>
-            <%if(post.postType === 'video'){%>
-                <div>
-                    <video
-                        id="my-video"
-                        class="video-js"
-                        controls
-                        preload="auto"
-                        width="400"
-                        height="160"
-                        poster=""
-                        data-setup="{}"
-                    >
-                        <source src="<%= post.imageVideo%>" type="video/mp4" />
-                        <!-- <source src="MY_VIDEO.webm" type="video/webm" /> -->
-                        <p class="vjs-no-js">
-                        To view this video please enable JavaScript, and consider upgrading to a
-                        web browser that
-                        <a href="https://videojs.com/html5-video-support/" target="_blank"
-                            >supports HTML5 video</a
-                        >
-                        </p>
-                    </video>
-                </div>
-            <%}%>
+            <%}%> <%= post.user.name%>
+        </div>
+        <img
+            src="<%= post.imageVideo%>"
+            height="400"
+            width="auto"
+            class="post-image-src card-img-top"
+        />
+        <div class="card-body">
             <%= post.content%>
-            <br>
-            <small>
-                <%= post.user.name%>
-            </small>
-
-            <!-- display like with links if logged in and if not just show the likes... -->
-            <br>
-
+        </div>
+        <div class="card-footer">
             <small class="likebox">
                 <%if (locals.user){%>
-                    <div class="likeOptions">
-                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('like') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like">
-                            <span class="emojis-post"><%= post.userReactionMap.get('like') %>👍</span>
-                        </a>
-                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('love') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love">
-                            <span class="emojis-post"><%= post.userReactionMap.get('love') %>❤️</span>
-                        </a>
-                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('haha') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=haha">
-                            <span class="emojis-post"><%= post.userReactionMap.get('haha') %>😆</span>
-                        </a>
-                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('anger') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=anger">
-                            <span class="emojis-post"><%= post.userReactionMap.get('anger') %>😡</span>
-                        </a>
-                        <a class="toggle-like-button" data-likes="<%= post.userReactionMap.get('sad') %>" href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=sad">
-                            <span class="emojis-post"><%= post.userReactionMap.get('sad') %>☹️</span>
-                        </a>
-                    </div>
-                    
-                <% }else{ %>
-                    <%= post.likes.length %> <span class="emojis-post">👍</span>
+                <div class="likeOptions">
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('like') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('like') %>👍</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('love') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('love') %>❤️</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('haha') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=haha"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('haha') %>😆</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('anger') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=anger"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('anger') %>😡</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('sad') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=sad"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('sad') %>☹️</span
+                        >
+                    </a>
+                </div>
+
+                <% }else{ %> <%= post.likes.length %>
+                <span class="emojis-post">👍</span>
                 <%}%>
             </small>
-
-        </p>
-        <div id="post-comments">
-            <%if (locals.user){%>
-                <form action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form">
+            <div id="post-comments">
+                <%if (locals.user){%>
+                <form
+                    action="/comments/create"
+                    method="POST"
+                    id="post-<%= post._id %>-comments-form"
+                >
                     <div class="form-group">
-                        <input type="text" name="content" placeholder="add your comments here.." class="form-control" required/>
+                        <input
+                            type="text"
+                            name="content"
+                            placeholder="add your comments here.."
+                            class="form-control"
+                            required
+                        />
                     </div>
                     <input type="hidden" name="post" value="<%= post._id%>" />
-                    <input type="submit" value="Add Comment" class="btn btn-primary"/>
+                    <input
+                        type="submit"
+                        value="Add Comment"
+                        class="btn btn-primary"
+                    />
                 </form>
-            <%}%>
-            <div class="post-comments-list">
-                <ul id="post-comments-<%= post._id%>" class="list-group">
-                    <%for (comment of post.comments){%>
-                       <%-include('_comments')-%>
-                    <%}%>
-                </ul>
+                <%}%>
+                <div class="post-comments-list">
+                    <ul id="post-comments-<%= post._id%>" class="list-group">
+                        <%for (comment of post.comments){%>
+                        <%-include('_comments')-%> <%}%>
+                    </ul>
+                </div>
             </div>
         </div>
+    </div>
+    <%}else if(post.postType === 'video'){%>
+    <div class="post-video-box card" style="width: auto;">
+        <div class="card-header">
+            <%if(locals.user && locals.user.id === post.user.id){%>
+            <small>
+                <a
+                    class="delete-post-button"
+                    href="/posts/destroy/<%= post.id%>"
+                    ><img src="/images/trash.svg" height="20px" width="20px"
+                /></a>
+            </small>
+            <%}%> <%= post.user.name%>
+        </div>
+        <video
+            class="post-video-src card-top-img"
+            controls
+            preload="auto"
+            width="auto"
+            height="400"
+        >
+            <source src="<%= post.imageVideo%>" type="video/mp4" />
+            <!-- <source src="MY_VIDEO.webm" type="video/webm" /> -->
+        </video>
+        <div class="card-body">
+            <%= post.content%>
+        </div>
+        <div class="card-footer">
+            <small class="likebox">
+                <%if (locals.user){%>
+                <div class="likeOptions">
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('like') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('like') %>👍</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('love') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('love') %>❤️</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('haha') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=haha"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('haha') %>😆</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('anger') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=anger"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('anger') %>😡</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('sad') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=sad"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('sad') %>☹️</span
+                        >
+                    </a>
+                </div>
+
+                <% }else{ %> <%= post.likes.length %>
+                <span class="emojis-post">👍</span>
+                <%}%>
+            </small>
+            <div id="post-comments">
+                <%if (locals.user){%>
+                <form
+                    action="/comments/create"
+                    method="POST"
+                    id="post-<%= post._id %>-comments-form"
+                >
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            name="content"
+                            placeholder="add your comments here.."
+                            class="form-control"
+                            required
+                        />
+                    </div>
+                    <input type="hidden" name="post" value="<%= post._id%>" />
+                    <input
+                        type="submit"
+                        value="Add Comment"
+                        class="btn btn-primary"
+                    />
+                </form>
+                <%}%>
+                <div class="post-comments-list">
+                    <ul id="post-comments-<%= post._id%>" class="list-group">
+                        <%for (comment of post.comments){%>
+                        <%-include('_comments')-%> <%}%>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}else{%>
+    <!-- display like with links if logged in and if not just show the likes... -->
+    <div class="card" style="width: auto;">
+        <div class="card-header">
+            <%if(locals.user && locals.user.id === post.user.id){%>
+            <small>
+                <a
+                    class="delete-post-button"
+                    href="/posts/destroy/<%= post.id%>"
+                    ><img src="/images/trash.svg" height="20px" width="20px"
+                /></a>
+            </small>
+            <%}%> <%= post.user.name%>
+        </div>
+        <div class="card-body">
+            <%= post.content%>
+        </div>
+        <div class="card-footer">
+            <small class="likebox">
+                <%if (locals.user){%>
+                <div class="likeOptions">
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('like') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=like"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('like') %>👍</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('love') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=love"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('love') %>❤️</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('haha') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=haha"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('haha') %>😆</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('anger') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=anger"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('anger') %>😡</span
+                        >
+                    </a>
+                    <a
+                        class="toggle-like-button"
+                        data-likes="<%= post.userReactionMap.get('sad') %>"
+                        href="/likes/toggle/?id=<%=post._id%>&type=Post&reaction=sad"
+                    >
+                        <span class="emojis-post"
+                            ><%= post.userReactionMap.get('sad') %>☹️</span
+                        >
+                    </a>
+                </div>
+
+                <% }else{ %> <%= post.likes.length %>
+                <span class="emojis-post">👍</span>
+                <%}%>
+            </small>
+            <div id="post-comments">
+                <%if (locals.user){%>
+                <form
+                    action="/comments/create"
+                    method="POST"
+                    id="post-<%= post._id %>-comments-form"
+                >
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            name="content"
+                            placeholder="add your comments here.."
+                            class="form-control"
+                            required
+                        />
+                    </div>
+                    <input type="hidden" name="post" value="<%= post._id%>" />
+                    <input
+                        type="submit"
+                        value="Add Comment"
+                        class="btn btn-primary"
+                    />
+                </form>
+                <%}%>
+                <div class="post-comments-list">
+                    <ul id="post-comments-<%= post._id%>" class="list-group">
+                        <%for (comment of post.comments){%>
+                        <%-include('_comments')-%> <%}%>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}%>
 </li>

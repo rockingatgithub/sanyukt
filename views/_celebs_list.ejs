@@ -1,0 +1,15 @@
+<ul class="list-group list-item-top-border">
+    <%for (u of celebs_user){%> <%if(locals.user.id !== u.id){%>
+    <li class="list-group-item list-item-flex">
+        <a href="/users/profile/<%= u.id%>" class="friend-names">
+            <img src="<%= u.avatar%>" class="friend-list-avatar" />
+            <%= u.name%>
+        </a>
+        <a
+            href="/users/friends/suggestions/<%= u.id%>"
+            class="friends-request btn btn-primary btn-sm"
+            >Add friend</a
+        >
+    </li>
+    <%}%> <%}%>
+</ul>

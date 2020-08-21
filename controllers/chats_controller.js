@@ -3,12 +3,16 @@ const User = require('../models/user')
 
 module.exports.create = async function (req, res) {
     try {
+        // console.log(req.body.chat_content + ' ' + req.user._id)
+        // console.log(req.body)
         let newChat = await Chat.create({
             content: req.body.chat_content,
             user: req.user._id,
         })
 
-        let chat = await newChat.populate('content', 'user').execPopulate()
+        let chat = await newChat.populate('user', 'name email').execPopulate()
+
+        // console.log(chat)
 
         return res.status(200).json({
             message: 'message sent',
@@ -17,6 +21,7 @@ module.exports.create = async function (req, res) {
             },
         })
     } catch (err) {
+        console.log(err)
         return res.status(200).json({
             message: 'Internal Server Error',
         })

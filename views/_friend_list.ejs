@@ -5,6 +5,7 @@
         <%for (u of all_users){%> <%if(locals.user.id !== u.id){%>
         <li class="list-group-item list-item-flex">
             <a href="/users/profile/<%= u.id%>" class="friend-names">
+                <img src="<%= u.avatar%>" class="friend-list-avatar" />
                 <%= u.name%>
             </a>
             <a
@@ -15,9 +16,11 @@
         </li>
         <%}%> <%}%>
     </ul>
+    <% if(rec_request.length !==0 ){%>
     <h5>
         Received Request
     </h5>
+    <%}%>
     <ul id="received-requests-list" class="list-group list-item-top-border">
         <%for (u of rec_request){%>
         <li class="list-group-item list-item-flex">
@@ -26,6 +29,10 @@
                     href="/users/profile/<%= u.from_user.id%>"
                     class="friend-names"
                 >
+                    <img
+                        src="<%= u.from_user.avatar%>"
+                        class="friend-list-avatar"
+                    />
                     <%= u.from_user.name%>
                 </a>
                 <a
@@ -43,9 +50,11 @@
         </li>
         <%}%>
     </ul>
+    <% if(sent_request.length !==0 ){%>
     <h5>
         Sent Request
     </h5>
+    <%}%>
     <ul id="sent-requests-list" class="list-group list-item-top-border">
         <%for (u of sent_request){%>
         <li class="list-group-item">
@@ -57,6 +66,10 @@
                     href="/users/profile/<%= u.to_user.id%>"
                     class="friend-names"
                 >
+                    <img
+                        src="<%= u.to_user.avatar%>"
+                        class="friend-list-avatar"
+                    />
                     <%= u.to_user.name%>
                 </a>
                 <a
@@ -71,9 +84,11 @@
         <%}%>
     </ul>
 
+    <% if(rec_request.length !==0 ){%>
     <h5>
         Friends
     </h5>
+    <%}%>
     <ul id="current-friends-list" class="list-group list-item-top-border">
         <%for (u of sent_friends){%>
         <li class="list-group-item list-item-flex">
@@ -82,6 +97,10 @@
                     href="/users/profile/<%= u.to_user.id%>"
                     class="friend-names"
                 >
+                    <img
+                        src="<%= u.to_user.avatar%>"
+                        class="friend-list-avatar"
+                    />
                     <%= u.to_user.name%>
                 </a>
                 <a
@@ -99,6 +118,10 @@
                     href="/users/profile/<%= u.from_user.id%>"
                     class="friend-names"
                 >
+                    <img
+                        src="<%= u.from_user.avatar%>"
+                        class="friend-list-avatar"
+                    />
                     <%= u.from_user.name%>
                 </a>
                 <a
