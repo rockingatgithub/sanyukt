@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 let opts = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'sanyukt'
+    secretOrKey: ''
 }
 
 passport.use(new JWTStrategy(opts, function(jwtPayLoad, done){
